@@ -1,4 +1,7 @@
 header{
     border: dashed green 3px;
     background-color: burlywood;
+    text-align: center;
+    text-decoration-style: double;
 }
+
