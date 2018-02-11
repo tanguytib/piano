@@ -1,7 +1,12 @@
 header{
     border: dashed green 3px;
-    background-color: burlywood;
-    text-align: center;
-    text-decoration-style: double;
+    background-color: dodgerblue;
+    
 }
 
+.mecenes{
+    text-align: left;
+    font-size: 30px;
+    border: solid grey 2px;
+    width: 150px;;
+}
