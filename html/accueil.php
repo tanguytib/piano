@@ -12,7 +12,7 @@
 		</header>
 
 		<!-- Formulaire de recherche -->
-		<form action="../html/search.php">
+		<form action="../html/recherche.php">
 		  <input type="text" name="fname" placeholder="Rechercher..." ><br>
 		  <input type="submit" value="" class="search_pic">
 		</form>
@@ -21,5 +21,8 @@
 	
 		
 	</body>
+	<footer>
+		<a href="../html/admin/index.php" >Admin</a>
+	</footer>
 </html>
         
