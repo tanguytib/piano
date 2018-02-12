@@ -1,4 +1,8 @@
 <!DOCTYPE HTML>
+<?php 
+session_start();
+?>
+
 <html lang="fr">
 	<head>
 		<meta charset="utf-8">
@@ -22,7 +26,10 @@
 		
 	</body>
 	<footer>
-		<a href="../html/admin/index.php" >Admin</a>
+		<form action="../html/admin/index.php">
+		  <input type="password" placeholder="Mot de passe" name="password" ><br>
+		  <input type="submit" value="go" >
+		</form>
 	</footer>
 </html>
         
