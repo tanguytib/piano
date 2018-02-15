@@ -26,7 +26,7 @@ session_start();
 		
 	</body>
 	<footer>
-		<form action="../html/admin/index.php">
+		<form action="../html/admin/index.php" method="POST">
 		  <input type="password" placeholder="Mot de passe" name="password" ><br>
 		  <input type="submit" value="go" >
 		</form>

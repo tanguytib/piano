@@ -10,7 +10,7 @@ if (isset($_POST['password'])){
 };
 if ($_SESSION['password'] != $password){
 	header('Location: /html/accueil.php');
-	};
+};
 ?>
 
 <html>
