@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<?php 
+<?php
 session_start();
 ?>
 
@@ -10,9 +10,11 @@ session_start();
 		<meta name="viewport" content="width=device-width">
 		<title>piano</title>
 	</head>
-    
+
 	<body>
 		<header>
+			<h1>Guiness Icam Records</h1>
+
 		</header>
 
 		<!-- Formulaire de recherche -->
@@ -20,16 +22,15 @@ session_start();
 		  <input type="text" name="fname" placeholder="Rechercher..." ><br>
 		  <input type="submit" value="" class="search_pic">
 		</form>
-		
+
 		<!-- Carrousel de records : affichage de quelques records avec flèches droites et gauches pour naviguer -->
-	
-		
+
+
 	</body>
 	<footer>
 		<form action="../html/admin/index.php" method="POST">
 		  <input type="password" placeholder="Mot de passe" name="password" ><br>
-		  <input type="submit" value="go" >
+		  <input type="submit" value="envoyer" >
 		</form>
 	</footer>
 </html>
-        
