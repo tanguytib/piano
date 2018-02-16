@@ -14,11 +14,12 @@ session_start();
 	<body>
 		<header>
 			<h1>Guiness Icam Records</h1>
+			<p>en vrai c'est si swag !</p>
 
 		</header>
 
 		<!-- Formulaire de recherche -->
-		<form action="../html/recherche.php">
+		<form action="../html/recherche.php" method="POST">
 		  <input type="text" name="fname" placeholder="Rechercher..." ><br>
 		  <input type="submit" value="" class="search_pic">
 		</form>
