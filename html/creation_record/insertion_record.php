@@ -14,8 +14,19 @@
 		'categorie' => $_POST['categorie']
 		));
 	
-	echo  'Ton record à bien été ajouté pti pédé !';
-	header()
+	/* Essai de jointure entre la table Records et la table Personnes
+	
+	$jointure = $db->query('SELECT p.nom AS nom_personne, r.nom AS nom_record
+							FROM Personnes AS p
+							INNER JOIN Records AS r
+							ON r.Id = r.Id
+							');
+							
+
+	*/
+	
+	echo  'Ton record à bien été ajouté futur champion !';
+	header('location : confirmation.php');
 
 ?>
 
