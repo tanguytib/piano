@@ -20,6 +20,15 @@ if ($_SESSION['password'] != $password){
 </head>
 
 <body>
-	Salut c'est l'index
+	Salut c'est l'index <br>
+	<br>
+	<a href='../admin/CreateAdminAccount.php'>Créer un compte admin</a><br>
+	INFO : 
+	<?php 
+		if (isset($_SESSION['msg'])){
+			echo $_SESSION['msg'];
+			unset ($_SESSION['msg']);
+		}
+	?>
 </body>
 </html>
