@@ -1,10 +1,6 @@
 <!doctype html>
 
-<?php 
-	if ((include '../DBconfig.php') == TRUE) {
-    	echo 'Fichier inclu';
-	};
-?>
+<?php include '../DBconfig.php' ?>
 
 <html>
 <head>
