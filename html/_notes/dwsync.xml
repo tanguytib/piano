@@ -1,8 +1,1 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<dwsync>
-<file name="accueil.php" server="ftp.pnfradio.fr" local="131632658339435105" remote="131632695000000000" Dst="1" />
-<file name="recherche.php" server="ftp.pnfradio.fr" local="131632658339520704" remote="131632659000000000" Dst="1" />
-<file name="requete.php" server="ftp.pnfradio.fr" local="131632658339550716" remote="131632659000000000" Dst="1" />
-<file name="record.php" server="ftp.pnfradio.fr" local="131632658339540711" remote="131632659000000000" Dst="1" />
-<file name="DBconfig.php" server="ftp.pnfradio.fr" local="131632690317737830" remote="131632690200000000" Dst="1" />
-</dwsync>
+<?xml version="1.0" encoding="utf-8" ?><dwsync><file name="requete.php" server="ftp.pnfradio.fr" local="131632658339550716" remote="131632659000000000" Dst="1" /><file name="DBconfig.php" server="ftp.pnfradio.fr" local="131632690317737830" remote="131632690200000000" Dst="1" /></dwsync>

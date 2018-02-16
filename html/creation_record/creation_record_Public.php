@@ -1,3 +1,4 @@
+
 <!doctype html>
 
 <?php include '../DBconfig.php' ?>
@@ -8,8 +9,12 @@
 	<title>Nouveau record</title>
 </head>
 
+
 <body>
-	<form action="../html/recherche.php">		
+
+	<h2>Créé ici ton propre record et deviens un champion ! </h2>
+
+	<form action="insertion_record.php" method="post">		
 		Intitulé du record : <input name='intitule' type='text'><br>
 		Numéro phare : <input name="numero_phare" type='number' step='any'><br>
 		Status :
