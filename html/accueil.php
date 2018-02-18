@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../DBconfig.php';
+include '../html/DBconfig.php';
 ?>
 
 <!DOCTYPE HTML>
@@ -29,24 +29,21 @@ include '../DBconfig.php';
 		<div id=carrousel>
 				<div id=NewRecord_1 style="border: thick #B85D6D 2px; width: 250px;">
 					<h1>Record battu de Jean-Robert</h1>
-					<p>Un évenemnt incroyable ce mardi après-midi ! Un jeune étudiant de la Mi à franchi le seuil des 5 avocats mangés en moins d'une minute !</p>
+					<p>Un évenement incroyable ce mardi après-midi ! Un jeune étudiant de la Mi à franchi le seuil des 5 avocats mangés en moins d'une minute !</p>
 				</div>
 		</div>
 
 
 		<!-- Déroulement des catégories-->
-		<div id=catégories>
-				<?php
-					$categories = $db->query('SELECT * FROM Categories')
-					or die(print_r($db->errorInfo()));
-					while($row = $categories->fetch())
-					{
-						echo 'voici la catégorie n°' . $row['id'] . ' : ' . $row['nom'];
-					}
-				?>
-				
-				
-				
+		<div id=categories>
+		<?php
+			$categories = $db->query('SELECT * FROM Categories')
+			or die(print_r($db->errorInfo()));
+			while($row = $categories->fetch())
+			{
+				echo 'voici la catégorie n°' . $row['id'] . ' : ' . $row['nom'];
+			}
+		?>
 		</div>
 		
 		
@@ -70,9 +67,15 @@ include '../DBconfig.php';
 
 </body>
 	<footer>
-		<form action="../html/admin/index.php" method="POST">
+		<form action="../html/admin/login.php" method="POST">
+		  <input type="text" placeholder="Pseudo" name="pseudo" ><br>
 		  <input type="password" placeholder="Mot de passe" name="password" ><br>
 		  <input type="submit" value="envoyer" >
 		</form>
+		<?php 
+			if (isset($_SESSION['msg'])){
+			echo 'INFO : ' . $_SESSION['msg'];
+			unset ($_SESSION['msg']); //Une fois le message affiché, on le supprime de la variable session
+		}?>
 	</footer>
 </html>

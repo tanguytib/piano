@@ -2,7 +2,7 @@
 	include '../DBconfig.php';
 	
 	
-
+	//Dude fait gaffe je sais pas ce que fais le pnfraxxxxxx ici...
 	$requete = $db->prepare('INSERT INTO pnfra796140(nom, prenom, promo, numero_phare, status, categorie) VALUES( :intitule, :numero_phare, :status, :nom, :prenom, :promo, :categorie,)');
 	$requete->execute(array(
 		'intitule' => $_POST['intitule'],

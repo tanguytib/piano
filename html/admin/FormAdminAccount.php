@@ -12,8 +12,9 @@
 		Nom : <input name='nom' type='text'><br>
 		Prénom : <input name='prenom' type='text'><br>
 		Promo : <input name='promo' type='number'><br>
-		Adresse mail : <input name='pseudo' type='text'><br>
-		<input name='isadmin' type='checkbox'> Je certifie ne pas avoir lu la charte <br>
+		Adresse mail : <input name='email' type='text'><br>
+		Mot de passe : <input name='password' type='password'><br>
+		<input name='stupid' type='checkbox'> Je certifie ne pas avoir lu la charte <br>
 		<input name='submit' type='submit' value='envoyer'>
 	</form>
 </body>

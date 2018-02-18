@@ -28,9 +28,8 @@ include '../DBconfig.php';
 		<select name="categorie" size="1">
 			<option> mort </option>
 			<?php 
-				$categories = $db->query('SELECT * FROM Categories')
-				or die(print_r($db->errorInfo()));
-				while ($row = $categories->fetch_assoc())
+				$categories = $db->query('SELECT * FROM Categories') or die(print_r($db->errorInfo()));
+				while($row = $categories->fetch_assoc())
 				{
 					echo "<option>" . $row['Nom'] . "</option>";
 				};
