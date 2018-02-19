@@ -14,7 +14,7 @@ include '../html/DBconfig.php';
 
 	<body>
 		<header>
-			<h1>Guiness Icam Records</h1>
+			<h1>Piano - Panier</h1>
 		</header>
 
 
@@ -28,8 +28,8 @@ include '../html/DBconfig.php';
 		<!-- Carrousel de records : affichage de quelques records avec flèches droites et gauches pour naviguer -->
 		<div id=carrousel>
 				<div id=NewRecord_1 style="border: thick #B85D6D 2px; width: 250px;">
-					<h1>Record battu de Jean-Robert</h1>
-					<p>Un évenement incroyable ce mardi après-midi ! Un jeune étudiant de la Mi à franchi le seuil des 5 avocats mangés en moins d'une minute !</p>
+					<h1>Concours de panier - piano</h1>
+					<p>Un évenement incroyable ce mardi après-midi ! Un jeune étudiant de la Mi à franchi le seuil des 47 piano/panier prononcés en moins d'une minute !</p>
 				</div>
 		</div>
 
@@ -49,13 +49,13 @@ include '../html/DBconfig.php';
 		
 		<!-- bouton permettant de créer un record -->
 		<div id=btn_creation_record>
-			<a href="creation_record/creation_record_Public.php" style="color: #942211"> Invente ton record !</a>
+			<a href="creation_record/creation_record_Public.php" style="color: #942211"> Invente ton panier !</a>
 		</div>
 
 
 		<!-- bouton permettant d'aller voir la liste des records existants -->
 		<div id=go_liste_records>
-			<a href="liste_record.php" style="color: #27BA85"> Voir la liste des records existants</a>
+			<a href="liste_record.php" style="color: #27BA85"> Voir la liste des pianos existants</a>
 		</div>
 		
 		
