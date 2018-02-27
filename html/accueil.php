@@ -14,7 +14,7 @@ include '../html/DBconfig.php';
 
 	<body>
 		<header>
-			<h1>Piano - Panier</h1>
+			<h1>Piano  - Panier</h1>
 		</header>
 
 
@@ -37,12 +37,14 @@ include '../html/DBconfig.php';
 		<!-- Déroulement des catégories-->
 		<div id=categories>
 		<?php
-			$categories = $db->query('SELECT * FROM Categories')
-			or die(print_r($db->errorInfo()));
-			while($row = $categories->fetch())
+			$categories = $db->query('SELECT * FROM Categories ');
+
+			while($row = $categories->fetch_assoc())
 			{
-				echo 'voici la catégorie n°' . $row['id'] . ' : ' . $row['nom'];
+				echo 'voici la catégorie n°' . $row['id'] . ' : ' . $row['Nom'] . '<br/>';
 			}
+			
+			$categories->close();
 		?>
 		</div>
 		

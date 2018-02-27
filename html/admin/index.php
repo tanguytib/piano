@@ -15,7 +15,7 @@ if ($_SESSION['logged'] != 1){
 
 <body>
 	Salut c'est l'index <br>
-	<br>
+	<br> 
 	<a href='../admin/FormAdminAccount.php'>Créer un compte admin</a><br>
 	
 	<?php 

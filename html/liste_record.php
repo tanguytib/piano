@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'DBconfig.php';
+
 ?>
 
 <!doctype html>
@@ -16,10 +17,11 @@ include 'DBconfig.php';
 			
 			
 		<?php 
-				$categories = $db->query('SELECT * FROM Categories') or die(print_r($db->errorInfo()));
-				while($row = $categories->fetch_assoc())
+			
+				$records = $db->query('SELECT * FROM Records') or die(print_r($db->errorInfo()));
+				while($row = $records->fetch_assoc())
 				{
-					echo "<div id='" . $row['Nom'] . "'><h2>" . $row['Nom'] . "</h2>"  ;
+					echo "<div id='" . $row['Id'] . "'><h2>" . $row['Intitule'] . "</h2>"  ;
 				};
 		?>
 	
