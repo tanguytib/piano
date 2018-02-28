@@ -35,12 +35,12 @@ include '../html/DBconfig.php';
 		
 		
 		<!-- Map de l'Icam-->
-		<div id="map" style="height: 400px; width: 100%;">
+		<div id="map" style="height: 40%; width: 40%;">
 			<script>
 			  function initMap() {
 				var icam = {lat: 50.630247, lng: 3.041703};
 				var map = new google.maps.Map(document.getElementById('map'), {
-				  zoom: 15,
+				  zoom: 17,
 				  center: icam
 				});
 				var marker = new google.maps.Marker({
