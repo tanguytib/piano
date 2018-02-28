@@ -32,7 +32,27 @@ include '../html/DBconfig.php';
 					<p>Un évenement incroyable ce mardi après-midi ! Un jeune étudiant de la Mi à franchi le seuil des 47 piano/panier prononcés en moins d'une minute !</p>
 				</div>
 		</div>
-
+		
+		
+		<!-- Map de l'Icam-->
+		<div id="map" style="height: 400px; width: 100%;">
+			<script>
+			  function initMap() {
+				var uluru = {lat: -25.363, lng: 131.044};
+				var map = new google.maps.Map(document.getElementById('map'), {
+				  zoom: 4,
+				  center: uluru
+				});
+				var marker = new google.maps.Marker({
+				  position: uluru,
+				  map: map
+				});
+			  }
+			</script>
+		<script async defer
+    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
+    	</script>
+		</div>
 
 		<!-- Déroulement des catégories-->
 		<div id=categories>
