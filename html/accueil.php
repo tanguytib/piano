@@ -38,19 +38,19 @@ include '../html/DBconfig.php';
 		<div id="map" style="height: 400px; width: 100%;">
 			<script>
 			  function initMap() {
-				var uluru = {lat: -25.363, lng: 131.044};
+				var icam = {lat: 50.630247, lng: 3.041703};
 				var map = new google.maps.Map(document.getElementById('map'), {
-				  zoom: 4,
-				  center: uluru
+				  zoom: 15,
+				  center: icam
 				});
 				var marker = new google.maps.Marker({
-				  position: uluru,
+				  position: icam,
 				  map: map
 				});
-			  }
+			  };
 			</script>
 		<script async defer
-    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
+    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4xd3D0FMFyKmn4mADuzQJDxieTmKWz8k&callback=initMap">
     	</script>
 		</div>
 
