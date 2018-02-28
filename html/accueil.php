@@ -61,7 +61,7 @@ include '../html/DBconfig.php';
 
 			while($row = $categories->fetch_assoc())
 			{
-				echo 'voici la catégorie n°' . $row['id'] . ' : ' . $row['Nom'] . '<br/>';
+				echo 'voici la catégorie n°' . $row['Id'] . ' : ' . $row['nom'] . '<br/>';
 			}
 			
 			$categories->close();
