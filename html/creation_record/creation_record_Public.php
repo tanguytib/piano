@@ -18,18 +18,11 @@ include '../DBconfig.php';
 	<form action="insertion_record.php" method="POST">		
 		Intitulé du panier : 
 			<input name='intitule' type='text'><br>
-		 
-			<textarea rows="4" cols="50">
-At Donne-nous plus de détails !w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
-</textarea>
+		Description du panier :
+			<textarea rows="4" cols="50"></textarea><br>
 		Numéro du panier: 
 			<input name="numero_phare" type='number' step='any'><br>
-		Status :
-			<select name="status" size="1">
-				<option>Etabli</option>
-				<option>Revendiqué</option>
-			</select><br>
-		Champion : 
+		Acheteur : 
 			Nom : 
 				<input name='nom' type='text'>  
 			Prénom : 
@@ -38,7 +31,6 @@ At Donne-nous plus de détails !w3schools.com you will learn how to make a websi
 				<input name='promo' type='text'><br>
 		Catégorie :
 			<select name="categorie" size="1">
-			<option> mort </option>
 			<?php 
 				$categories = $db->query('SELECT * FROM Categories') or die(print_r($db->errorInfo()));
 				while($row = $categories->fetch_assoc())
@@ -47,7 +39,7 @@ At Donne-nous plus de détails !w3schools.com you will learn how to make a websi
 				};
 			?>
 			</select><br>
-	
+		<input name="status" type='hidden' size="1" value="Revendiqué">
 		<input type='submit' value='Enregistrer'>
 	</form>
 </body>
