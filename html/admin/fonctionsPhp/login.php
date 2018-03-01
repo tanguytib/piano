@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../DBconfig.php';
+include '../../DBconfig.php';
 if (!($_POST['password'] == '') and !($_POST['pseudo']=='')){
 	
 	$password = $_POST['password'];

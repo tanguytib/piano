@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="index.php" server="ftp.pnfradio.fr" local="131634587787617092" remote="131634587400000000" Dst="1" />
-<file name="SetAdminAccount.php" server="ftp.pnfradio.fr" local="131634505853821870" remote="131634508800000000" Dst="1" />
-<file name="FormAdminAccount.php" server="ftp.pnfradio.fr" local="131634508980043651" remote="131634508800000000" Dst="1" />
-<file name="login.php" server="ftp.pnfradio.fr" local="131634587416114305" remote="131634587400000000" Dst="1" />
+<file name="FormAdminAccount.php" server="ftp.pnfradio.fr" local="131643904772111457" remote="131643904200000000" Dst="1" />
+<file name="accueilAdmin.php" server="ftp.pnfradio.fr" local="131644177930831841" remote="131644177800000000" Dst="1" />
 </dwsync>

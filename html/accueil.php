@@ -89,7 +89,7 @@ include '../html/DBconfig.php';
 
 </body>
 	<footer>
-		<form action="../html/admin/login.php" method="POST">
+		<form action="admin/fonctionsPhp/login.php" method="POST">
 		  <input type="text" placeholder="Pseudo" name="pseudo" ><br>
 		  <input type="password" placeholder="Mot de passe" name="password" ><br>
 		  <input type="submit" value="envoyer" >

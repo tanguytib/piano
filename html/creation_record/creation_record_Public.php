@@ -35,7 +35,7 @@ include '../DBconfig.php';
 				$categories = $db->query('SELECT * FROM Categories') or die(print_r($db->errorInfo()));
 				while($row = $categories->fetch_assoc())
 				{
-					echo "<option>" . $row['Nom'] . "</option>";
+					echo "<option>" . $row['nom'] . "</option>";
 				};
 			?>
 			</select><br>

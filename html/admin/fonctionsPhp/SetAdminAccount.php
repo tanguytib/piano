@@ -1,7 +1,7 @@
 <!doctype HTML>
 <?php
 	session_start();
-	include '../DBconfig.php';
+	include '../../DBconfig.php';
 
 	$nom = htmlspecialchars($_POST['nom']);
 	$prenom =  htmlspecialchars($_POST['prenom']);
@@ -20,5 +20,5 @@
 		$_SESSION['msg'] = "Erreur lors de l'ajout du compte administrateur :" . $result;
 	};
 
-	header('Location: /html/admin/index.php')
+	header('Location: /html/admin/accueilAdmin.php');
 ?>

@@ -7,7 +7,7 @@
 
 <body>
 	Créer un compte administrateur :
-	<form action='../admin/SetAdminAccount.php' method='post'>
+	<form action='fonctionsPhp/SetAdminAccount.php' method='post'>
 		Pseudo : <input name='pseudo' type='text'><br>
 		Nom : <input name='nom' type='text'><br>
 		Prénom : <input name='prenom' type='text'><br>

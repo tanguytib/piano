@@ -25,7 +25,7 @@
 
 	*/
 	
-	echo  'Ton record à bien été ajouté futur champion !';
+	echo  'Ton panier à bien été ajouté futur champion !';
 	header('location : confirmation.php');
 
 ?>
