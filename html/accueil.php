@@ -20,7 +20,7 @@ include '../html/DBconfig.php';
 
 		<!-- Formulaire de recherche -->
 		<form action="recherche.php" method="POST">
-		  <input type="text" name="fname" placeholder="Rechercher..." ><br>
+		  <input type="text" name="recherche" placeholder="Rechercher..." ><br>
 		  <input type="submit" value="" class="search_pic">
 		</form>
 
@@ -61,7 +61,7 @@ include '../html/DBconfig.php';
 
 			while($row = $categories->fetch_assoc())
 			{
-				echo 'voici la catégorie n°' . $row['Id'] . ' : ' . $row['nom'] . '<br/>';
+				echo 'voici la catégorie n°'.$row['Id'].' : '.$row['nom'].'<br/>';
 			}
 			
 			$categories->close();
@@ -69,7 +69,7 @@ include '../html/DBconfig.php';
 		</div>
 		
 		
-		<!-- bouton permettant de créer un record -->
+		<!-- bouton permettant de créer un record -->	
 		<div id=btn_creation_record>
 			<a href="creation_record/creation_record_Public.php" style="color: #942211"> Invente ton panier !</a>
 		</div>

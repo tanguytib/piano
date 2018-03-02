@@ -1,3 +1,7 @@
+<?php
+session_start();
+include 'DBconfig.php';
+?>
 <!doctype html>
 <html>
 <head>
@@ -9,47 +13,85 @@
 	<h1>Voici les résultats de ta recherche !</h1>
 
 	<?php
-	
-	function determination_recherche($recherche)
-{
-    global $bd;
-    switch ($recherche)
-    {
-        case(preg_match("#^(11[89]|12[0123]|201[89]|202[0123]){1}$#", $recherche) ? true : false):
-        {
-            $champ='promo';
-            $rechercheee = explode(" ", $recherche,5);
-            $promo = $rechercheee[0];
-            if(!isset($rechercheee[1]))
-            {
-                $recherche_bdd =$bd->prepare('SELECT * FROM guests WHERE promo = :promo LIMIT :start_lign, :rows_per_page');
-                $recherche_bdd -> bindParam('start_lign', $start_lign, PDO::PARAM_INT);
-                $recherche_bdd -> bindParam('rows_per_page', $rows_per_page, PDO::PARAM_INT);
-                $recherche_bdd -> bindParam('promo', $promo, PDO::PARAM_STR);
-                $count_recherche = count_promo($promo);
-            }
-	
-	
-	
-	
-	
-	
+	#function determination_recherche($recherche, $start_lign, $rows_per_page)
+	{
+		$recherche=$_POST['recherche'];
+		switch ($recherche){
+				
+			case(preg_match("#^(11[89]|12[0123]|201[89]|202[0123]){1}$#", $recherche) ==1):
+			{	#recherche par promo
+				echo "case promo<br>";
+				$promo= $recherche;
+				
+				$recherche_bdd =$db->query("SELECT nom,prenom,nb_record_battu FROM Personnes WHERE promo =" . $promo) or die(print_r($db->errorInfo()));
+
+				while($row = $recherche_bdd->fetch_assoc())
+					{	
+						echo $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
+					};
+				break;
+			}
+				
+				
+			case(preg_match("#^[a-zéèçôîûâ]+ [a-zçôîûâ]+$#i",$recherche) ==1):
+			{	#recherche par prenom nom
+				echo "case prenom/nom<br>";
+				$recherche = explode(" " , $recherche);
+				$prenom= '^'.$recherche[0];
+				$nom= '^'.$recherche[1];
+				
+				$recherche_bdd =$db->query("SELECT nom,prenom,nb_record_battu 
+											FROM Personnes 
+											WHERE prenom REGEXP '" . $prenom . "'
+											AND nom REGEXP '" . $nom . "'")
+											#OR prenom REGEXP '" . $nom . "'   		Essais pour avoir la 
+											#AND nom REGEXP '" . $prenom . "' 		recherche nom/prenom
+									or die(print_r($db->errorInfo()));
+
+				while($row = $recherche_bdd->fetch_assoc())
+					{	
+						echo $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
+					};
+				break;;
+			}
+			
+				
+				
+			case(preg_match("#^[a-zéèçôîûâ]{1}[a-zçôîûâ]{1}$#i",$recherche) ==1):
+			{	#recherche par initiales
+				echo "case initiales pn<br>";
+				$prenom= '^'.$recherche[0];
+				$nom= '^'.$recherche[1];
+				
+				$recherche_bdd =$db->query("SELECT nom,prenom,nb_record_battu 
+											FROM Personnes 
+											WHERE prenom REGEXP '" . $prenom . "'
+											AND nom REGEXP'" . $nom . "'")
+									or die(print_r($db->errorInfo()));
+
+				while($row = $recherche_bdd->fetch_assoc())
+					{	
+						echo $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
+					};
+				break;
+			}
+				
+				
+				
+			default:
+				echo "arrete de rager  <br>";
+				$recherche = explode(" " , $recherche);
+            	$prenom = $recherche[0];
+				echo $prenom;
+				
+
+			break;
+
 		}
 	}
-}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	
 	
 	?>
