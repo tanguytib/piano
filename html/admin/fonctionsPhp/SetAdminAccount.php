@@ -12,7 +12,7 @@
 	$password =  password_hash(htmlspecialchars($_POST['password']),PASSWORD_BCRYPT);
 
 	$query = "INSERT INTO Personnes (Nom, Prenom, Jury, Promo, Pseudo, Email, Password) VALUES( '$nom', '$prenom', '1', '$promo', '$pseudo', '$email', '$password')";
-	$result = mysqli_query($db, $query) or trigger_error($db->error."[ $sql]");
+	$result = mysqli_query($db, $query) or trigger_error($db->error);
 
 	if ($result){
 		$_SESSION['msg'] = "Compte administrateur ajouté avec succès !";

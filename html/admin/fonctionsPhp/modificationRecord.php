@@ -1,43 +1,46 @@
 <?php
+	session_start();
 	include '../DBconfig.php';
 
-	$intitule = htmlspecialchars($_POST['intitule']);
-	$detail = htmlspecialchars($_POST['detail']);
-	$categorie = htmlspecialchars($_POST['categorie']);
-	$numero_phare = htmlspecialchars($_POST['numero_phare']);
-	$nom = htmlspecialchars($_POST['nom']);
-	$prenom = htmlspecialchars($_POST['prenom']);
-	$promo = htmlspecialchars($_POST['promo']);
-	$statut = htmlspecialchars($_POST['statut']);
-	if ($statut) $statut='Validé'; else $statut='Revendiqué';
-	$dateRevendication = htmlspecialchars($_POST['dateRevendication']);
-	$dateValidation = htmlspecialchars($_POST['dateValidation']);
+	$Id=mysqli_real_escape_string($db, $_POST['Id']);
+	$intitule = mysqli_real_escape_string($db, $_POST['intitule']);
+	$detail = mysqli_real_escape_string($db, $_POST['detail']);
+	$categorie = mysqli_real_escape_string($db, $_POST['categorie']);
+	$numero_phare = mysqli_real_escape_string($db, $_POST['numero_phare']);
+	$nom = mysqli_real_escape_string($db, $_POST['nom']);
+	$prenom = mysqli_real_escape_string($db, $_POST['prenom']);
+	$promo = mysqli_real_escape_string($db, $_POST['promo']);
+	$statut = mysqli_real_escape_string($db, $_POST['statut']);
+	if ($statut) $statut='Valide'; else $statut='Revendique';
+	$dateRevendication = mysqli_real_escape_string($db, $_POST['dateRevendication']);
+	$dateValidation = mysqli_real_escape_string($db, $_POST['dateValidation']);
 
 	#La personne en question est-elle connue des services d'espionnage ?
-	$query = "SELECT * FROM Personnes WHERE nom='$nom' AND prenom='$prenom' AND promo='$promo'";
+	$query1 = "SELECT * FROM Personnes WHERE nom='$nom' AND prenom='$prenom' AND promo='$promo'";
 	#Si oui on récupère son Id
-	if ($personnes = $db->query($query)) {
-		$champion = $personnes->fetch_assoc()['Id'];
+	$result1 = mysqli_query($db,$query1) or trigger_error($db->error);
+	if (mysqli_num_rows($result1)==1) {
+		$champion = $result1->fetch_assoc()['Id'];	
 	} else #Sinon on crée une nouvelle personne
 	{
-		$db->query("INSERT INTO Personnes(nom, prenom, promo) VALUES('$nom', '$prenom', '$promo')");
-		$champion = $db->insert_id; #et on récupère son Id
+		$result = mysqli_query($db, "INSERT INTO Personnes(nom, prenom, promo) VALUES('$nom', '$prenom', '$promo')") or trigger_error($db->error);
+		$champion = mysqli_insert_id($db); #et on récupère son Id
 	}
 
+	#A quel Id correspond la catégorie sélectionnée ?
+	$query2="SELECT * FROM Categories WHERE nom='$categorie'";
+	$categorieId = mysqli_query($db, $query2)->fetch_assoc()['Id'];
+	
 
-	$query = "UPDATE Records(intitule, detail, statut, champion, categorie, numero_phare, dateRevendication, dateValidation) VALUES('$intitule', '$detail', '$statut', '$champion', '$categorie', '$numero_phare', '$dateRevendication', '$dateValidation')";
+	#Mise à jour du record dans la table
+	$query3 = "UPDATE Records SET intitule='$intitule', detail='$detail', statut='$statut', champion='$champion', categorie='$categorieId', numero_phare='$numero_phare', dateRevendication='$dateRevendication', dateValidation='$dateValidation' WHERE Id='$Id';";
 
-	$result = mysqli_query($db, $query) or trigger_error($db->error."[ $sql]");
+	$result = mysqli_query($db, $query3) or trigger_error($db->error);
 	
 	if ($result){
-		echo 'ok <br>';
 		$_SESSION['msg'] = "Le panier a bien été modifié !";
 	} else {
 		$_SESSION['msg'] = "Erreur lors de la modification du panier :" . $result;
-		echo 'okok' . $result->error . '<br>';
 	};
-	
-	echo $query;
-	echo $result;
-	//header('Location: /html/admin/accueilAdmin.php');
+	header('Location: /html/admin/accueilAdmin.php');
 ?>
