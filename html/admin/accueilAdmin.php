@@ -14,14 +14,14 @@
 <body>
 	<h1>Bienvenue sur l'accueil des Admins</h1>
 	
-	<a href='../admin/FormAdminAccount.php'>Créer un compte admin</a><br>
-	
 	<?php 
 		if (isset($_SESSION['msg'])){
 			echo 'INFO : ' . $_SESSION['msg'];
 			unset ($_SESSION['msg']); //Une fois le message affiché, on le supprime de la variable session
 		}
 	?>
+	
+	<a href='../admin/FormAdminAccount.php'>Créer un compte admin</a><br>
 	
 	<h3>Liste des records revendiqués : </h3>
 	<?php

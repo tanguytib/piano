@@ -27,10 +27,10 @@
 		#On récupère les informations relatives à la personne détenant le record
 		$personnes = $db->query('SELECT * FROM Personnes WHERE Id="' . $record['champion'] . '"' );
 		$personne = $personnes->fetch_assoc();
-		echo $personne['nom'];
 	?>
 	
-	<form action="../admin/fonctionsPhp/modificationRecord.php" method="POST">		
+	<form action="../admin/fonctionsPhp/modificationRecord.php" method="POST">
+		<input type='hidden' name='Id' value=<?php echo $Id ?>>
 		Intitulé du panier : 
 			<input name='intitule' type='text' value=<?php echo "'". $record['intitule'] . "'" ?>><br>
 		Description du panier :
@@ -42,7 +42,7 @@
 			Prénom : <input name='prenom' type='text' value=<?php echo "'" . $personne['prenom'] ."'"?>>  
 			Promo : <input name='promo' type='text' value=<?php echo "'" . $personne['promo'] ."'"?>><br>
 		Catégorie :
-			<select name="categorie" size="1" selected=<?php echo '"' . $ancienneCategorie . '"'?>>
+			<select name="categorie" size="1">
 			<?php 
 				$categories = $db->query('SELECT * FROM Categories') or die(print_r($db->errorInfo()));
 				while($categorie = $categories->fetch_assoc())
@@ -56,8 +56,8 @@
 			?>
 			</select><br>
 		Record validé : <input name="statut" type='checkbox'><br>
-		Date de revendication : <input type='date' name='dateRevendication'><br><br>
-		Date de validation : <input type='date' name='dateValidation'><br>
+		Date de revendication : <input type='date' name='dateRevendication' value=<?php echo "'" . $record['dateRevendication'] . "'"?></inpu>><br><br>
+		Date de validation : <input type='date' name='dateValidation' value=<?php echo "'" . $record['dateValidation'] . "'"?>><br>
 		<input type='submit' value='Enregistrer'></form>
 </body>
 </html>
