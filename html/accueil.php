@@ -90,14 +90,14 @@ include '../html/DBconfig.php';
 </body>
 	<footer>
 		<form action="admin/fonctionsPhp/login.php" method="POST">
-		  <input type="text" placeholder="Pseudo" name="pseudo" ><br>
+		  <input type="text" placeholder="Email" name="email" ><br>
 		  <input type="password" placeholder="Mot de passe" name="password" ><br>
 		  <input type="submit" value="envoyer" >
 		</form>
 		<?php 
 			if (isset($_SESSION['msg'])){
 			echo 'INFO : ' . $_SESSION['msg'];
-			unset ($_SESSION['msg']); //Une fois le message affiché, on le supprime de la variable session
-		}?>
+			unset ($_SESSION['msg']);} //Une fois le message affiché, on le supprime de la variable session
+		?>
 	</footer>
 </html>

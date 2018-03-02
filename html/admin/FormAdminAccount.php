@@ -8,7 +8,6 @@
 <body>
 	Créer un compte administrateur :
 	<form action='fonctionsPhp/SetAdminAccount.php' method='post'>
-		Pseudo : <input name='pseudo' type='text'><br>
 		Nom : <input name='nom' type='text'><br>
 		Prénom : <input name='prenom' type='text'><br>
 		Promo : <input name='promo' type='number'><br>

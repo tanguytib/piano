@@ -8,6 +8,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" href="../css/bootstrap/bootstrap.css">
 	<title>Admin panel</title>
 </head>
 
@@ -26,11 +27,18 @@
 	<h3>Liste des records revendiqués : </h3>
 	<?php
 		$recordsRevendique = $db->query("SELECT * FROM Records WHERE statut='revendique' ") or die(print_r($db->errorInfo()));
-			while($row = $recordsRevendique->fetch_assoc())
+			while($row = $recordsRevendique->fetch_assoc()) 
 			{
 				echo "<div ><h2>" . $row['intitule'] . "</h2>"  ;
-				echo "<a href=../admin/modifierRecord.php?Id=" . $row['Id'] . "> Modifier ce record </a>";
+				echo "<a href=../admin/modifierRecord.php?Id=" . $row['Id'] . "> Modifier ce record </a> <br>";
+				echo "<a class='btn btn-default' data-toggle='confirmation' data-title='Supprimer' href='/html/admin/fonctionsPhp/suppressionRecord.php?Id=" . $row['Id'] . "' target='_blank'>Supprimer</a>";
 			};
 	?>
+	<a class='btn btn-large btn-primary' data-toggle='confirmation' data-title='Etes-vous sûr ?' href='/html/admin/fonctionsPhp/suppressionRecord.php?Id=9' target='_blank'> Supprimer </a>
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src='/js/bootstrap/bootstrap.js'></script>
+	<script src='/js/bootstrap/bootstrap-confirmation.js'></script>
 </body>
 </html>
