@@ -22,7 +22,7 @@ include 'DBconfig.php';
 			{	#recherche par promo
 				echo "case promo<br>";
 				$promo= $recherche;
-				
+				echo $promo;
 				$recherche_bdd =$db->query("SELECT nom,prenom,nb_record_battu FROM Personnes WHERE promo =" . $promo) or die(print_r($db->errorInfo()));
 
 				while($row = $recherche_bdd->fetch_assoc())
@@ -43,9 +43,9 @@ include 'DBconfig.php';
 				$recherche_bdd =$db->query("SELECT nom,prenom,nb_record_battu 
 											FROM Personnes 
 											WHERE prenom REGEXP '" . $prenom . "'
-											AND nom REGEXP '" . $nom . "'")
-											#OR prenom REGEXP '" . $nom . "'   		Essais pour avoir la 
-											#AND nom REGEXP '" . $prenom . "' 		recherche nom/prenom
+											AND nom REGEXP '" . $nom . "'
+											OR prenom REGEXP '" . $nom . "'   		 
+											AND nom REGEXP '" . $prenom . "' ")		
 									or die(print_r($db->errorInfo()));
 
 				while($row = $recherche_bdd->fetch_assoc())
@@ -54,9 +54,8 @@ include 'DBconfig.php';
 					};
 				break;;
 			}
+				
 			
-				
-				
 			case(preg_match("#^[a-zéèçôîûâ]{1}[a-zçôîûâ]{1}$#i",$recherche) ==1):
 			{	#recherche par initiales
 				echo "case initiales pn<br>";
@@ -74,19 +73,42 @@ include 'DBconfig.php';
 						echo $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
 					};
 				break;
-			}
+			}	
+			
+				
+			case(preg_match("#^[a-zéèçôîûâ]{3,}$#i",$recherche) ==1):
+			{	#recherche par prenom ou nom
+				echo "case prenom ou nom<br>";
+				$prenom_ou_nom= '^'.$recherche;
+				
+				$recherche_bdd =$db->query("SELECT nom,prenom,nb_record_battu 
+											FROM Personnes 
+											WHERE prenom REGEXP '" . $prenom_ou_nom . "'
+											OR nom REGEXP '" . $prenom_ou_nom . "' ")		
+									or die(print_r($db->errorInfo()));
+
+				while($row = $recherche_bdd->fetch_assoc())
+					{	
+						echo $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
+					};
+				break;;
+			}	
+				
+			
+				
+				
+
 				
 				
 				
 			default:
-				echo "arrete de rager  <br>";
+			{
 				$recherche = explode(" " , $recherche);
             	$prenom = $recherche[0];
 				echo $prenom;
-				
-
-			break;
-
+				echo "arrete de rager  <br>";
+				break;
+			}
 		}
 	}
 	
