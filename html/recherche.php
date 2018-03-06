@@ -13,109 +13,119 @@ include 'DBconfig.php';
 	<h1>Voici les résultats de ta recherche !</h1>
 
 	<?php
-	#function determination_recherche($recherche, $start_lign, $rows_per_page)
-	{
+	
 		$recherche=$_POST['recherche'];
-		switch ($recherche){
+		switch (isset($recherche))
+		{
 				
 			case(preg_match("#^(11[89]|12[0123]|201[89]|202[0123]){1}$#", $recherche) ==1):
-			{	#recherche par promo
-				echo "case promo<br>";
+			{	#recherche par PROMO
+				echo "Promo <br>";
 				$promo= $recherche;
-				echo $promo;
-				$recherche_bdd =$db->query("SELECT nom,prenom,nb_record_battu FROM Personnes WHERE promo =" . $promo) or die(print_r($db->errorInfo()));
-
-				while($row = $recherche_bdd->fetch_assoc())
-					{	
-						echo $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
-					};
+				$recherche_bdd =$db->query("SELECT Id,nom,prenom,nb_record_battu 
+											FROM Personnes 
+											WHERE promo =" . $promo) 
+									or die(print_r($db->errorInfo()));
+				if(mysqli_num_rows($recherche_bdd)==0){
+					echo "Sorry we couldn't find anything like that !";	
+				}
+				else
+				{ 
+					while($row = $recherche_bdd->fetch_assoc())
+						{	
+							echo "<div id='" . $row['Id'] ."'>" . $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
+						};
+				}	
 				break;
 			}
 				
 				
-			case(preg_match("#^[a-zéèçôîûâ]+ [a-zçôîûâ]+$#i",$recherche) ==1):
-			{	#recherche par prenom nom
-				echo "case prenom/nom<br>";
+			case(preg_match("#^[a-zéèçôîûâ]{3,}+( [a-zçôîûâ]+)?$#i",$recherche) ==1):
+			{	#recherche par PRENOM NOM
+				echo "Prenom nom <br>";
 				$recherche = explode(" " , $recherche);
 				$prenom= '^'.$recherche[0];
 				$nom= '^'.$recherche[1];
 				
-				$recherche_bdd =$db->query("SELECT nom,prenom,nb_record_battu 
+				$recherche_bdd =$db->query("SELECT Id,nom,prenom,nb_record_battu 
 											FROM Personnes 
 											WHERE prenom REGEXP '" . $prenom . "'
 											AND nom REGEXP '" . $nom . "'
 											OR prenom REGEXP '" . $nom . "'   		 
 											AND nom REGEXP '" . $prenom . "' ")		
 									or die(print_r($db->errorInfo()));
-
-				while($row = $recherche_bdd->fetch_assoc())
-					{	
-						echo $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
-					};
+				
+				if(mysqli_num_rows($recherche_bdd)==0){
+					echo "Sorry we couldn't find anything like that !";	
+				}
+				else
+				{ 
+					while($row = $recherche_bdd->fetch_assoc())
+						{	
+							echo "<div id='" . $row['Id'] ."'>" . $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
+						};
+				}
 				break;;
 			}
-				
 			
+				
+	
 			case(preg_match("#^[a-zéèçôîûâ]{1}[a-zçôîûâ]{1}$#i",$recherche) ==1):
-			{	#recherche par initiales
-				echo "case initiales pn<br>";
+			{	#recherche par INITIALES
+				echo "Initiales <br>";
 				$prenom= '^'.$recherche[0];
 				$nom= '^'.$recherche[1];
 				
-				$recherche_bdd =$db->query("SELECT nom,prenom,nb_record_battu 
+				$recherche_bdd =$db->query("SELECT Id,nom,prenom,nb_record_battu 
 											FROM Personnes 
 											WHERE prenom REGEXP '" . $prenom . "'
 											AND nom REGEXP'" . $nom . "'")
 									or die(print_r($db->errorInfo()));
-
-				while($row = $recherche_bdd->fetch_assoc())
+				if(mysqli_num_rows($recherche_bdd)==0){
+					echo "Sorry we couldn't find anything like that !";	
+				}
+				else
+				{ 
+					while($row = $recherche_bdd->fetch_assoc())
 					{	
-						echo $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
+						echo "<div id='" . $row['Id'] ."'>" . $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
 					};
+				}
 				break;
-			}	
+			}
 			
-				
-			case(preg_match("#^[a-zéèçôîûâ]{3,}$#i",$recherche) ==1):
-			{	#recherche par prenom ou nom
-				echo "case prenom ou nom<br>";
-				$prenom_ou_nom= '^'.$recherche;
-				
-				$recherche_bdd =$db->query("SELECT nom,prenom,nb_record_battu 
-											FROM Personnes 
-											WHERE prenom REGEXP '" . $prenom_ou_nom . "'
-											OR nom REGEXP '" . $prenom_ou_nom . "' ")		
+			
+			case(preg_match("#^[a-zéèçôîûâ]{4,}$#i",$recherche) ==1):
+			{	#recherche par RECORDS
+				echo "Records <br>";
+				$recherche_bdd =$db->query("SELECT Id,intitule,detail,champion,numero_phare 
+											FROM Records 
+											WHERE intitule REGEXP '". $recherche ."'
+											OR detail REGEXP '". $recherche ."' ")
 									or die(print_r($db->errorInfo()));
-
-				while($row = $recherche_bdd->fetch_assoc())
+				if(mysqli_num_rows($recherche_bdd)==0){
+					echo "Sorry we couldn't find anything like that !";	
+				}
+				else
+				{ 
+					while($row = $recherche_bdd->fetch_assoc())
 					{	
-						echo $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
+						echo "<div id='" . $row['Id'] ."'>" . $row['intitule'] . " " . $row['detail'] . " " . $row['champion'] . " " . $row['numero_phare'] . "<br>" ;
 					};
-				break;;
-			}	
-				
+				}
+			break;
+			}
 			
 				
-				
 
-				
-				
-				
 			default:
 			{
-				$recherche = explode(" " , $recherche);
-            	$prenom = $recherche[0];
-				echo $prenom;
-				echo "arrete de rager  <br>";
+				echo "arrete de rager " . $recherche;
 				break;
 			}
 		}
-	}
 	
-	
-		
-	
-	
+
 	?>
 	
 </body>
