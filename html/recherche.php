@@ -10,7 +10,7 @@ include '../html/DBconfig.php';
 </head>
 	
 <body>
-	<h1>Voici les résultats de ta recherche !</h1>
+	<h1>Voici les résultat s de ta recherche !</h1>
 
 	<?php
 		/*#Cette 2emem methode de recherche marche sur les noms et prenoms
