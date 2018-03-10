@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="accueil.php" server="ftp.pnfradio.fr" local="131644714320416840" remote="131644732200000000" Dst="1" />
@@ -7,3 +8,6 @@
 <file name="accueil.php" server="Macintosh HD/Users/gregoiremarotte/Desktop/MonPiano" local="3602019536" remote="3602019536" Dst="-1" />
 <file name="liste_record.php" server="ftp.pnfradio.fr" local="3602702619" remote="3602702580" Dst="-1" />
 </dwsync>
+=======
+<?xml version="1.0" encoding="utf-8" ?><dwsync><file name="accueil.php" server="ftp.pnfradio.fr" local="3603281486" remote="3603281460" Dst="1" /><file name="DBconfig.php" server="ftp.pnfradio.fr" local="3603278687" remote="3603278640" Dst="1" /><file name="DBconfig.php" server="Macintosh HD/Users/gregoiremarotte/Desktop/MonPiano" local="3602166476" remote="3602166476" Dst="-1" /><file name="accueil.php" server="Macintosh HD/Users/gregoiremarotte/Desktop/MonPiano" local="3602019536" remote="3602019536" Dst="-1" /><file name="liste_record.php" server="ftp.pnfradio.fr" local="3602702619" remote="3602702580" Dst="-1" /><file name="recherche.php" server="ftp.pnfradio.fr" local="3603286419" remote="3603286380" Dst="-1" /></dwsync>
+>>>>>>> origin/master

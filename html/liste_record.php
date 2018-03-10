@@ -14,7 +14,6 @@ include 'DBconfig.php';
 	<h1>Voici la listes de tous nos champions !</h1>
 	<div id="container">
 			
-			
 		<?php 
 				$records = $db->query('SELECT * FROM Records') or die(print_r($db->errorInfo()));
 
