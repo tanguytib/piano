@@ -13,27 +13,41 @@ include '../html/DBconfig.php';
 	<h1>Voici les résultats de ta recherche !</h1>
 
 	<?php
-		#Cette 2emem methode de recherche marche mais le fieldcount==0 ne marche pas...
+		/*#Cette 2emem methode de recherche marche sur les noms et prenoms
 		$recherche=$_POST['recherche'];
-		$requete_bdd=$db->prepare("SELECT Id,nom,prenom,nb_record_battu 
-												FROM Personnes 
-												WHERE promo =?
-												ORDER BY nb_record_battu DESC");
+		$requete_bdd=$db->prepare("SELECT nom,prenom FROM Personnes WHERE promo =?");
 		$requete_bdd->bind_param("s",$recherche);
 		$requete_bdd->execute();
 		$result=$requete_bdd->get_result();
-		if($requete_bdd->field_count==0){
-			echo "Aucun résultats PROMO ";	
+		while($row = $result->fetch_assoc())
+		{
+			echo $row['nom']. "  ".$row['prenom'];
 		}
-		else
-		{ 
-			while($row = $result->fetch_assoc())
-			{	echo '<br>dasn le while <br>';
-				printf ("%s fait parti de la promo 120<br>",$row['nom']);
-				printf ("Il a battu %s de record<br>",$row['nb_record_battu']);
-				printf ("nom : %s<br><br>",$row['prenom']);				
-			}
+		*/
+		$recherche="%{$_POST['recherche']}%";
+	
+		$requete_bdd=$db->prepare("SELECT champion FROM Records WHERE detail LIKE ?");
+		$requete_bdd->bind_param("s",$recherche);
+		$requete_bdd->execute();
+		$result=$requete_bdd->get_result();
+		$IdChampions = array();
+		while($row = $result->fetch_assoc())
+		{	
+			array_push($IdChampions,$row['champion']);
 		}
+	
+		$IdChampions=implode(" ",$IdChampions);
+		print_r($IdChampions);
+		$resultatsRecords=$db->query("SELECT nom,prenom FROM Personnes WHERE Id IN('$IdChampions')");
+		while($row = $resultatsRecords->fetch_assoc())
+		{	
+			echo "voici les champions des records contenants ".$recherche." : <br>". $row['nom']." ".$row['prenom']." voila<br>";
+		}
+			
+	
+	
+	
+	
 		/*
 		$recherche=$_POST['recherche'];
 		determination_recherche($recherche);
