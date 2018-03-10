@@ -10,41 +10,95 @@ include '../html/DBconfig.php';
 </head>
 	
 <body>
-	<h1>Voici les résultat s de ta recherche !</h1>
+	<h1>Voici les résultats de ta recherche !</h1>
 
 	<?php
-		/*#Cette 2emem methode de recherche marche sur les noms et prenoms
 		$recherche=$_POST['recherche'];
-		$requete_bdd=$db->prepare("SELECT nom,prenom FROM Personnes WHERE promo =?");
-		$requete_bdd->bind_param("s",$recherche);
-		$requete_bdd->execute();
-		$result=$requete_bdd->get_result();
-		while($row = $result->fetch_assoc())
+		
+		#Recherche par PROMO
+		if(preg_match("#^(11[89]|12[0123]|201[89]|202[0123]){1}$#", $recherche) ==1)
 		{
-			echo $row['nom']. "  ".$row['prenom'];
+			echo "<strong>Personnes : </strong><br>";
+			$requete_bdd=$db->prepare("SELECT nom,prenom,promo FROM Personnes WHERE promo =?");
+			$requete_bdd->bind_param("s",$recherche);
+			$requete_bdd->execute();
+			$result=$requete_bdd->get_result();
+			if($result->num_rows==0){
+				echo "Aucune personnes trouvée dans la promo ". $recherche."<br>";
+			}
+			else
+			{
+				while($row = $result->fetch_assoc())
+				{
+					echo $row['nom']. " ".$row['prenom']." (".$row['promo']." )<br>";
+				}
+			}
 		}
-		*/
-		$recherche="%{$_POST['recherche']}%";
-	
-		$requete_bdd=$db->prepare("SELECT champion FROM Records WHERE detail LIKE ?");
-		$requete_bdd->bind_param("s",$recherche);
-		$requete_bdd->execute();
-		$result=$requete_bdd->get_result();
-		$IdChampions = array();
-		while($row = $result->fetch_assoc())
-		{	
-			array_push($IdChampions,$row['champion']);
-		}
-	
-		$IdChampions=implode(" ",$IdChampions);
-		print_r($IdChampions);
-		$resultatsRecords=$db->query("SELECT nom,prenom FROM Personnes WHERE Id IN('$IdChampions')");
-		while($row = $resultatsRecords->fetch_assoc())
-		{	
-			echo "voici les champions des records contenants ".$recherche." : <br>". $row['nom']." ".$row['prenom']." voila<br>";
-		}
+		
+		#Recherche par PRENOM NOM #^[a-zéèçôîûâ]{1}[a-zçôîûâ]{1}$#i
+		elseif(preg_match("#^[a-zéèçôîûâ]{3,}+( [a-zçôîûâ]+)?$#i",$recherche) ==1)
+		{
+			$recherche = explode(" " , $recherche);
+			$prenom= '^'.$recherche[0];
+			$nom= '^'.$recherche[1];
 			
+			echo "<strong>Etudiant : </strong><br>";
+			$requete_bdd=$db->prepare("SELECT nom,prenom,promo,nb_record_battu 
+										FROM Personnes 
+										WHERE prenom REGEXP ? AND nom REGEXP ? OR prenom REGEXP ? AND nom REGEXP ?");
+			$requete_bdd->bind_param("ssss",$prenom,$nom,$nom,$prenom);
+			$requete_bdd->execute();
+			$result=$requete_bdd->get_result();
+			if($result->num_rows==0){
+				echo "Aucun resultat trouvé pour ". $recherche."<br>";
+			}
+			else
+			{
+				while($row = $result->fetch_assoc())
+				{
+					echo $row['nom']. " ".$row['prenom']." (".$row['promo'].") a battu ".$row['nb_record_battu']." records !<br>";
+				}
+			}
+			
+			
+		}
 	
+	
+	
+	
+	
+	
+	
+		else
+		{
+			#Recherche dans les details 		
+			echo "<strong>Records : </strong><br>";
+			$rechercheAvecPourcentage="%{$_POST['recherche']}%";
+
+			$requete_bdd=$db->prepare("SELECT champion FROM Records WHERE detail LIKE ?");
+			$requete_bdd->bind_param("s",$rechercheAvecPourcentage);
+			$requete_bdd->execute();
+			$result=$requete_bdd->get_result();
+			$IdChampions = array();
+			while($row = $result->fetch_assoc())
+			{	
+				array_push($IdChampions,$row['champion']);
+			}
+
+			$IdChampions=implode(", ",$IdChampions);
+			$resultatsRecords=$db->query("SELECT nom,prenom,promo FROM Personnes WHERE Id IN($IdChampions)");
+			if($resultatsRecords->num_rows==0){
+				echo "Aucun records pour la recherche : ". $recherche."<br>";
+			}
+			else
+			{
+				echo "voici les champions des records contenants ".$recherche." : <br>";
+				while($row = $resultatsRecords->fetch_assoc())
+				{	
+					echo $row['prenom']." ".$row['nom']." (".$row['promo'].")<br>";
+				}
+			}
+		}
 	
 	
 	

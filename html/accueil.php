@@ -13,7 +13,7 @@ include '../html/DBconfig.php';
 	</head>
 
 	<body>
-		<header>
+		<header>	
 			<h1>Piano  - Panier</h1>
 		</header>
 
