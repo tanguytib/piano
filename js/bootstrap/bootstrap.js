@@ -400,6 +400,7 @@ var Button = function ($$$1) {
     FOCUS_BLUR_DATA_API: "focus" + EVENT_KEY + DATA_API_KEY + " " + ("blur" + EVENT_KEY + DATA_API_KEY)
     /**
      * ------------------------------------------------------------------------
+
      * Class Definition
      * ------------------------------------------------------------------------
      */
