@@ -44,12 +44,13 @@
 	<h3>Liste des évènements non validés : </h3>
 	<?php
 	#On recherche les évènements non validés
-		$recordsRevendique = $db->query("SELECT *, Evenements.Id AS Idevenement FROM Evenements INNER JOIN Records ON Evenements.Idrecord=Records.Id WHERE IsNull(Evenements.date_validation)") or die(print_r($db->errorInfo()));
+		$recordsRevendique = $db->query("SELECT *, Evenements.Id AS Idevenement FROM Evenements INNER JOIN Records ON Evenements.Idrecord=Records.Id WHERE IsNull(Evenements.date_validation) OR Evenements.date_validation='0000-00-00'") or die(print_r($db->errorInfo()));
 			while($row = $recordsRevendique->fetch_assoc()) 
 			{
 				echo "<div ><h2>" . $row['intitule'] . "</h2>"  ;
-				echo "<a href=../admin/modifierRecordEvenement.php?Id=" . $row['Idevenement'] . "> Modifier ce piano </a> <br>";
-				echo '<button class="btn btn-large btn-primary" data-toggle="confirmation"
+				echo "<a href=../admin/modifierRecord.php?Id=" . $row['Idevenement'] . "> Modifier le panier </a> <br>";
+				echo "<a href=../admin/modifierEvenement.php?Id=" . $row['Idevenement'] . "> Modifier le piano </a> <br>";
+				echo '<button class="btn btn-large btn-danger" data-toggle="confirmation"
 						data-btn-ok-label="Eh oui" data-btn-ok-icon="glyphicon glyphicon-share-alt"
 						data-btn-ok-class="btn-success"
 						data-btn-cancel-label="Nooooon !" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
@@ -62,11 +63,10 @@
 	<br>
 
 	
-	
+	<!-- Javascript popup confirmation-->
 	<script>
 		$('[data-toggle=confirmation]').confirmation({
 		rootSelector: '[data-toggle=confirmation]',
-		 // other options
 		});
 	</script>
 </body>

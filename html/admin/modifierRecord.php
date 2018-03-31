@@ -22,12 +22,19 @@
 </head>
 
 <body>
+	<?php 
+		#On récupère les informations du record à modifier
+		$Id = htmlspecialchars($_GET['Id']);
+		$records = $db->query('SELECT *, Categories.nom AS nomCategorie, Records.Id AS Idrecord FROM Records INNER JOIN Categories ON Records.Idcategorie=Categories.Id INNER JOIN Evenements ON Evenements.Idrecord=Records.Id WHERE Evenements.Id="' . $Id .'" ') or die(print_r($db->errorInfo()));
+		$record = $records->fetch_assoc();
+		$ancienneCategorie = $record['nomCategorie'];	
+	?>
 	
-	<h2>Créer un panier :</h2>
-	<form name='record' action="../admin/fonctionsPhp/creationRecord.php" method="POST">
-		<input type='hidden' name='Idrecord' />
-		Intitulé du panier : <input name='intitule' type='text' /><br>
-		Description du panier : <textarea name='detail' records="4" cols="100"></textarea><br>
+	<h2>Modifier le record :</h2>
+	<form name='record' action="../admin/fonctionsPhp/modificationRecord.php" method="POST">
+		<input type='hidden' name='Idrecord' value=<?php echo '"' . $record['Idrecord'] . '"'?> />
+		Intitulé du panier : <input name='intitule' type='text' value=<?php echo $record['intitule'] ?> /><br>
+		Description du panier : <textarea name='detail' records="4" cols="100"><?php echo $record['detail'] ?></textarea><br>
 		Catégorie :
 			<select name="categorie" size="1">
 			<?php 

@@ -13,14 +13,14 @@
 	
 
 	#Mise à jour du record dans la table
-	$query = "UPDATE Records SET intitule='$intitule', detail='$detail', Idcategorie='$categorieId' WHERE Id='$Id';";
+	$query = "INSERT INTO Records (intitule, detail, Idcategorie) VALUES '$intitule', '$detail', '$categorieId';";
 
 	$result = mysqli_query($db, $query) or trigger_error($db->error);
 	
 	if ($result){
-		$_SESSION['msg'] = "Le panier a bien été modifié !";
+		$_SESSION['msg'] = "Le panier a bien été créé !";
 	} else {
-		$_SESSION['msg'] = "Erreur lors de la modification du piano :" . $query;
+		$_SESSION['msg'] = "Erreur lors de la création du piano :" . $result;
 	};
 	header('Location: /html/admin/accueilAdmin.php');
 ?>
