@@ -26,6 +26,7 @@
 </head>
 
 <body>
+	
 	<h1>Bienvenue sur l'accueil des Admins</h1>
 	
 	<?php 
@@ -40,20 +41,21 @@
 	<br>
 	<a href='../admin/creerRecord.php'>Créer un record</a><br>
 	<br>
-	<h3>Liste des pianos : </h3>
+	<h3>Liste des évènements non validés : </h3>
 	<?php
-		$recordsRevendique = $db->query("SELECT * FROM Records WHERE statut='revendique'") or die(print_r($db->errorInfo()));
+	#On recherche les évènements non validés
+		$recordsRevendique = $db->query("SELECT *, Evenements.Id AS Idevenement FROM Evenements INNER JOIN Records ON Evenements.Idrecord=Records.Id WHERE IsNull(Evenements.date_validation)") or die(print_r($db->errorInfo()));
 			while($row = $recordsRevendique->fetch_assoc()) 
 			{
 				echo "<div ><h2>" . $row['intitule'] . "</h2>"  ;
-				echo "<a href=../admin/modifierRecord.php?Id=" . $row['Id'] . "> Modifier ce piano </a> <br>";
+				echo "<a href=../admin/modifierRecordEvenement.php?Id=" . $row['Idevenement'] . "> Modifier ce piano </a> <br>";
 				echo '<button class="btn btn-large btn-primary" data-toggle="confirmation"
 						data-btn-ok-label="Eh oui" data-btn-ok-icon="glyphicon glyphicon-share-alt"
 						data-btn-ok-class="btn-success"
 						data-btn-cancel-label="Nooooon !" data-btn-cancel-icon="glyphicon glyphicon-ban-circle"
 						data-btn-cancel-class="btn-danger"
-						data-title="Attention" data-content="Détruire ce record ?"
-						href="/html/admin/fonctionsPhp/suppressionRecord.php?Id=' . $row['Id'] . '"> Supprimer
+						data-title="Attention" data-content="Supprimer cet événement ?"
+						href="/html/admin/fonctionsPhp/suppressionEvenement.php?Id=' . $row['Idevenement'] . '"> Supprimer
 					  </button>';
 			};
 	?>
