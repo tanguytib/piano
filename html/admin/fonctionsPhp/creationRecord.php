@@ -13,7 +13,7 @@
 	
 
 	#Mise à jour du record dans la table
-	$query = "INSERT INTO Records (intitule, detail, Idcategorie) VALUES '$intitule', '$detail', '$categorieId';";
+	$query = "INSERT INTO Records (intitule, detail, Idcategorie) VALUES ('$intitule', '$detail', '$categorieId');";
 
 	$result = mysqli_query($db, $query) or trigger_error($db->error);
 	

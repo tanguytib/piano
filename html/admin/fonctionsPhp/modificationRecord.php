@@ -2,7 +2,7 @@
 	session_start();
 	include '../DBconfig.php';
 
-	$Id=mysqli_real_escape_string($db, $_POST['Idrecord']);
+	$Id = mysqli_real_escape_string($db, $_POST['Idrecord']);
 	$intitule = mysqli_real_escape_string($db, $_POST['intitule']);
 	$detail = mysqli_real_escape_string($db, $_POST['detail']);
 	$categorie = mysqli_real_escape_string($db, $_POST['categorie']);

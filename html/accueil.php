@@ -1,6 +1,6 @@
 <?php
-session_start();
-include '../html/DBconfig.php';
+	session_start();
+	include '../html/DBconfig.php';
 ?>
 
 <!DOCTYPE HTML>

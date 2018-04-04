@@ -1,19 +1,24 @@
 <?php
-session_start();
-include '../html/DBconfig.php';
+	session_start();
+	include '../html/DBconfig.php';
 ?>
 <!doctype html>
 <html>
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" href="../css/styles.css">
 	<title>Recherche</title>
 </head>
 	
 <body>
-	<h1>Voici les résultats de ta recherche !</h1>
-
 	<?php
-		$recherche=$_POST['recherche'];
+		$recherche=htmlspecialchars($_POST['recherche']);
+	?>
+	<form action="recherche.php" method="POST">
+		  <input type="text" name="recherche" value=<?php echo '"' . $recherche . '"' ?></input>
+		  <input type="submit" value="" class="search_pic">
+	</form>
+	<?php
 		
 		#Recherche par PROMO
 		if(preg_match("#^(11[89]|12[0123]|201[89]|202[0123]){1}$#", $recherche) ==1)
