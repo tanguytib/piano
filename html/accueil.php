@@ -65,7 +65,7 @@ include '../html/DBconfig.php';
 			}
 			
 			$categories->close();
-		?>
+		?>	
 		</div>
 		
 		

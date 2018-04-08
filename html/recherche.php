@@ -13,29 +13,34 @@ include '../html/DBconfig.php';
 	<h1>Voici les résultats de ta recherche !</h1>
 
 	<?php
-		$recherche=$_POST['recherche'];
+		$recherche= htmlspecialchars($_POST['recherche']);
+		$resultats_recherche=[];
+		$nombreDeResultat=0;
 		
 		#Recherche par PROMO
 		if(preg_match("#^(11[89]|12[0123]|201[89]|202[0123]){1}$#", $recherche) ==1)
 		{
 			echo "<strong>Personnes : </strong><br>";
-			$requete_bdd=$db->prepare("SELECT nom,prenom,promo FROM Personnes WHERE promo =?");
+			$requete_bdd=$db->prepare("SELECT * FROM Personnes WHERE promo =?");
 			$requete_bdd->bind_param("s",$recherche);
 			$requete_bdd->execute();
 			$result=$requete_bdd->get_result();
-			if($result->num_rows==0){
-				echo "Aucune personnes trouvée dans la promo ". $recherche."<br>";
-			}
-			else
+			$nombreDeResultat=$result->num_rows;
+			if($nombreDeResultat=!0)
 			{
+				echo "<br>".$nombreDeResultat . " resultats pour la recherche '".$recherche . "'<br>";
 				while($row = $result->fetch_assoc())
 				{
 					echo $row['nom']. " ".$row['prenom']." (".$row['promo']." )<br>";
 				}
 			}
+			else
+			{
+				echo "Aucune personnes trouvée dans la promo ". $recherche."<br>";
+			}
 		}
 		
-		#Recherche par PRENOM NOM #^[a-zéèçôîûâ]{1}[a-zçôîûâ]{1}$#i
+		#Recherche par PRENOM NOM  
 		elseif(preg_match("#^[a-zéèçôîûâ]{3,}+( [a-zçôîûâ]+)?$#i",$recherche) ==1)
 		{
 			$recherche = explode(" " , $recherche);
@@ -56,23 +61,41 @@ include '../html/DBconfig.php';
 			{
 				while($row = $result->fetch_assoc())
 				{
-					echo $row['nom']. " ".$row['prenom']." (".$row['promo'].") a battu ".$row['nb_record_battu']." records !<br>";
+					echo $row['nom']. " ".$row['prenom']." (".$row['promo'].") a battu ".$row['nb_record_battu']." paniers !<br>";
 				}
 			}
-			
-			
 		}
-	
-	
-	
-	
-	
+			
+		elseif(preg_match("#^[a-zéèçôîûâ]{1}[a-zçôîûâ]{1}$#i",$recherche) ==1)
+		{	#recherche par INITIALES
+			echo "Initiales <br>";
+			$prenom= '^'.$recherche[0];
+			$nom= '^'.$recherche[1];
+			
+			echo $prenom;
+			echo $nom;
+			$recherche_bdd =$db->query("SELECT Id,nom,prenom,nb_record_battu 
+										FROM Personnes 
+										WHERE prenom REGEXP '" . $prenom . "'
+										AND nom REGEXP'" . $nom . "'")
+								or die(print_r($db->errorInfo()));
+			if(mysqli_num_rows($recherche_bdd)==0){
+				echo "Aucun résultats INITIALES ";	
+			}
+			else
+			{ 
+				while($row = $recherche_bdd->fetch_assoc())
+				{	
+					echo "<div id='" . $row['Id'] ."'>" . $row['nom'] . " " . $row['prenom'] . " " . $row['promo'] . " " . $row['nb_record_battu'] . "<br>" ;
+				};
+			}
+		}
 	
 	
 		else
 		{
 			#Recherche dans les details 		
-			echo "<strong>Records : </strong><br>";
+			echo "<strong>Panier : </strong><br>";
 			$rechercheAvecPourcentage="%{$_POST['recherche']}%";
 
 			$requete_bdd=$db->prepare("SELECT champion FROM Records WHERE detail LIKE ?");
@@ -88,18 +111,19 @@ include '../html/DBconfig.php';
 			$IdChampions=implode(", ",$IdChampions);
 			$resultatsRecords=$db->query("SELECT nom,prenom,promo FROM Personnes WHERE Id IN($IdChampions)");
 			if($resultatsRecords->num_rows==0){
-				echo "Aucun records pour la recherche : ". $recherche."<br>";
+				echo "Aucun panier pour la recherche : ". $recherche."<br>";
 			}
 			else
 			{
-				echo "voici les champions des records contenants ".$recherche." : <br>";
+				echo "voici les champions des panier contenants ".$recherche." : <br>";
 				while($row = $resultatsRecords->fetch_assoc())
 				{	
 					echo $row['prenom']." ".$row['nom']." (".$row['promo'].")<br>";
 				}
 			}
 		}
-	
+		
+		
 	
 	
 		/*
@@ -124,7 +148,7 @@ include '../html/DBconfig.php';
 										or die(print_r($db->errorInfo()));
 					if(mysqli_num_rows($recherche_bdd)==0){
 						echo "Aucun résultats PROMO ";	
-					}
+				}
 					else
 					{ 
 						while($row = $recherche_bdd->fetch_assoc())
