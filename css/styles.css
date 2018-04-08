@@ -7,3 +7,19 @@
 	background-size:100% 100%;
 	cursor: pointer;
 }
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row > [class^="col-"],
+.row > [class*=" col-"] {
+  display: flex;
+  align-items: center;
+}
+
+.row-padded {
+  background-color: #F7F7F7;
+  border: 1px solid #DDD;
+}

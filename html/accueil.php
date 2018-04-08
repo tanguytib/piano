@@ -1,6 +1,6 @@
 <?php
-session_start();
-include '../html/DBconfig.php';
+	session_start();
+	include '../html/DBconfig.php';
 ?>
 
 <!DOCTYPE HTML>
@@ -26,10 +26,16 @@ include '../html/DBconfig.php';
 
 
 		<!-- Carrousel de records : affichage de quelques records avec flèches droites et gauches pour naviguer -->
-		<div id=carrousel>
+		<div id=carrousel class="carousel-item">
 				<div id=NewRecord_1 style="border: thick #B85D6D 2px; width: 250px;">
-					<h1>Concours de panier - piano</h1>
-					<p>Un évenement incroyable ce mardi après-midi ! Un jeune étudiant de la Mi à franchi le seuil des 47 piano/panier prononcés en moins d'une minute !</p>
+					<h1>Pianos random à la une</h1>
+					<?php
+						$query="SELECT id, intitule, detail FROM Records ORDER BY RAND() LIMIT 3";
+						$requete = mysqli_query($db, $query);
+						while($reponse= $requete->fetch_assoc())
+						{?> 
+					<h2>Titre du piano  à la mode :<?php echo $reponse['intitule'];?></h2>
+					<p>Détail du piano  : <?php echo $reponse['detail']; } ?></p>
 				</div>
 		</div>
 		

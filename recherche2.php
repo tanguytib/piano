@@ -66,7 +66,7 @@ include '../html/DBconfig.php';
 				$nombreDeResultatRecords=$resultat_tags->num_rows;
 			}
 		}
-	$resultat_records
+	$resul
 		
 		
 	
