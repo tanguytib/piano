@@ -42,6 +42,7 @@
 				};
 			?>
 			</select><br>
+		Tags (séparés d'un espace) : <textarea name='tags' records="1" cols="100"></textarea><br>
 		<input name='submitrecord' type='submit' value='Enregistrer'>
 	</form>
 	<br><br>

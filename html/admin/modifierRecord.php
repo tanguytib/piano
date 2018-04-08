@@ -49,6 +49,16 @@
 				};
 			?>
 			</select><br>
+		Tags (séparés d'un espace) : <textarea name='tags' records="1" cols="100"><?php 
+			$Idrecord = $record['Idrecord'];
+			$query = "SELECT nom FROM Tags INNER JOIN TagsRecords ON TagsRecords.Idtag=Tags.Id WHERE TagsRecords.Idrecord='$Idrecord'";
+			$tags = mysqli_query($db, $query);
+			$tag = $tags->fetch_assoc();			
+			while ($tag <> "") {
+				echo $tag['nom'] . " ";
+				$tag = $tags->fetch_assoc();	
+			}
+		?></textarea><br>
 		<input name='submitrecord' type='submit' value='Enregistrer'>
 	</form>
 	<br><br>
