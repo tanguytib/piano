@@ -12,11 +12,11 @@
 	
 <body>
 	<?php
-<<<<<<< HEAD
+
 		$recherche= htmlspecialchars($_POST['recherche']);
 		$resultats_recherche=[];
 		$nombreDeResultat=0;
-=======
+
 		$recherche=htmlspecialchars($_POST['recherche']);
 	?>
 	<form action="recherche.php" method="POST">
@@ -24,7 +24,7 @@
 		  <input type="submit" value="" class="search_pic">
 	</form>
 	<?php
->>>>>>> 22a1e3453a13a760e7cc2b4ac7ab74bb14ea18b1
+
 		
 		#Recherche par PROMO
 		if(preg_match("#^(11[89]|12[0123]|201[89]|202[0123]){1}$#", $recherche) ==1)

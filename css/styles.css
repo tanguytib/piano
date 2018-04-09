@@ -23,3 +23,12 @@
   background-color: #F7F7F7;
   border: 1px solid #DDD;
 }
+
+#panelCategories{
+	display: flex;
+	justify-content: space-between;
+}
+
+.categorie{
+	font: 40px bold,Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif" ;
+}

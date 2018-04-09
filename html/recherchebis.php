@@ -10,36 +10,47 @@ include '../html/DBconfig.php';
 </head>
 	
 <body>
-	<h1>Voici les résultats de ta recherche2 !</h1>
+	<h1>Voici les résultats de ta recherchebis !</h1>
 
 	<?php
-	$recherche= htmlspecialchars($_POST['recherche']);
+	#/!\ Attention il n'y a pas de lien dans la bdd entre les records et les personnes !
 	
-	function rechercher($recherche)
+	$recherche= htmlspecialchars($_POST['recherche']);	
+	
+	rechercher($db, $recherche);
+	
+	function rechercher($db, $recherche)
 	{	
+		
 		#Création d'array de reponses vides
 		$resultat_personne=[];
 		$resultat_records=[];
 		$resultat_tags=[];
 		
-		
+		#recuperation des Id des entrées de la Table Promo
+		$promos=[];
+		$requete_promo=$db->query("SELECT nom FROM Promos")or die(print_r($db->errorInfo()));;
+		while($row=$requete_promo->fetch_assoc()){
+		array_push($promos,$row);
+		}
+	
 		#Recherche par PROMO
 		if(preg_match("#^(11[89]|12[0123]|201[89]|202[0123]){1}$#", $recherche) ==1)
 		{
-			#echo "<strong>Personnes : </strong><br>";
-			$requete_bdd=$db->prepare("SELECT * FROM Personnes WHERE promo =?");
-			$requete_bdd->bind_param("s",$recherche);
+			echo "<strong>Personnes : </strong><br>";
+			
+			$requete_bdd=$db->prepare("SELECT * FROM Personnes WHERE Idpromo IN $promos");
+			$requete_bdd->bind_param('s',$recherche);
 			$requete_bdd->execute();
 			$resultat_personne=$requete_bdd->get_result();
 			$nombreDeResultatPersonnes=$resultat_personne->num_rows;
-			
 		}
 		
 		else
 		{	#recherche par INITIALES
 			if(preg_match("#^[a-zéèçôîûâ]{1}[a-zçôîûâ]{1}$#i",$recherche) ==1)
 			{	
-				#echo "Initiales <br>";
+				echo "Initiales <br>";
 				$prenom= '^'.$recherche[0];
 				$nom= '^'.$recherche[1];
 
@@ -58,24 +69,27 @@ include '../html/DBconfig.php';
 			{
 				$requete_bdd=$db->query('SELECT * 
 										FROM Records
-										JOIN Tag_Records ON (Tags_Recods.IdRecord = Records.Id)
-										JOIN Tag ON (Tag.Id=Tags_Records.IdTag)
+										JOIN TagRecords ON (TagsRecods.Idrecord = Records.Id)
+										JOIN Tag ON (Tags.Id=TagsRecords.Idtag)
 										WHERE Tags.nom ="'.$recherche.'"')
-								or die(print_r($db->errorInfo()));
+								or die(print_r($db->errorInfo()))
+					;
 				$resultat_tags=$requete_bdd->get_result();
 				$nombreDeResultatRecords=$resultat_tags->num_rows;
 			}
 		}
-	$resul
+
 		
 		
 	
-	return 
+		return 'resultasPers :'.$resultat_personne.'NBresultasPers :'.$nombreDeResultatPersonnes.
+			'resultags :'.$resultat_tags.'NBresultags :'.$nombreDeResultatRecords; 
 	}
 	
 	
+	#du branle en dessous
 		
-		
+	/*	
 		$nombreDeResultat=0;
 		
 		#Recherche par PROMO
@@ -181,9 +195,9 @@ include '../html/DBconfig.php';
 				}
 			}
 		}
-			
+			*/
 	
-	
+	?>
 	
 	
 	
