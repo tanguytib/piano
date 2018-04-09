@@ -19,11 +19,11 @@
 
 
 		<!-- Formulaire de recherche -->
-		<form action="recherche.php" method="POST">
+		<form action="recherche2.php" method="POST">
 		  <input type="text" name="recherche" placeholder="Rechercher..." ><br>
 		  <input type="submit" value="" class="search_pic">
 		</form>
-
+	
 
 		<!-- Carrousel de records : affichage de quelques records avec flèches droites et gauches pour naviguer -->
 		<div id=carrousel class="carousel-item">
@@ -36,42 +36,44 @@
 						{?> 
 					<h2>Titre du piano  à la mode :<?php echo $reponse['intitule'];?></h2>
 					<p>Détail du piano  : <?php echo $reponse['detail']; } ?></p>
+					
 				</div>
 		</div>
 		
 		
-		<!-- Map de l'Icam-->
-		<div id="map" style="height: 40%; width: 40%;">
+		<!-- Map de l'Icam -34.397, 150.644-->  
+		
+		<div id="map" style="border: solid black 2px; height: 400px; width: 800px;">
 			<script>
+			  var map;
 			  function initMap() {
-				var icam = {lat: 50.630247, lng: 3.041703};
-				var map = new google.maps.Map(document.getElementById('map'), {
-				  zoom: 17,
-				  center: icam
+				map = new google.maps.Map(document.getElementById('map'), {
+				  center: {lat: 50.630076, lng: 3.041706},
+				  zoom: 19,
+					mapTypeId: 'satellite'
 				});
-				var marker = new google.maps.Marker({
-				  position: icam,
-				  map: map
-				});
-			  };
+				  map.setTilt(45);
+				  
+			  }
 			</script>
-		<script async defer
-    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4xd3D0FMFyKmn4mADuzQJDxieTmKWz8k&callback=initMap">
-    	</script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=	AIzaSyDabbINunYPOvfWQhBKeBoMn1MwvHbky2Q&callback=initMap"
+			async defer></script>
 		</div>
 
 		<!-- Déroulement des catégories-->
-		<div id=categories>
+		<div id=panelCategories>
+			<form action="categorie.php" method="get" target="_blank" id=formCategorie>
 		<?php
-			$categories = $db->query('SELECT * FROM Categories ');
+			$categories = $db->query('SELECT * FROM Categories ORDER BY RAND() LIMIT 6 ');
 
 			while($row = $categories->fetch_assoc())
 			{
-				echo 'voici la catégorie n°'.$row['Id'].' : '.$row['nom'].'<br/>';
+				echo '<button type="submit" class=categorie value="Submit" id='.$row['Id'].'>'.$row['nom'].'<br/>';
 			}
 			
 			$categories->close();
 		?>	
+			</form>
 		</div>
 		
 		
