@@ -9,75 +9,93 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="../css/styles.css">
 		<meta name="viewport" content="width=device-width">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<title>piano</title>
 	</head>
+	
+	
+	
 
 	<body>
+		<a href="accueil.php">Home</a>
 		<header>	
 			<h1>Piano  - Panier</h1>
 		</header>
-
+		
 
 		<!-- Formulaire de recherche -->
-		<form action="recherche.php" method="POST">
+		<form action="recherchebis.php" method="post">
 		  <input type="text" name="recherche" placeholder="Rechercher..." ><br>
 		  <input type="submit" value="" class="search_pic">
 		</form>
-
-
+	
+	
 		<!-- Carrousel de records : affichage de quelques records avec flèches droites et gauches pour naviguer -->
-		<div id=carrousel>
+		<div id=carrousel class="carousel-item">
 				<div id=NewRecord_1 style="border: thick #B85D6D 2px; width: 250px;">
-					<h1>Concours de panier - piano</h1>
-					<p>Un évenement incroyable ce mardi après-midi ! Un jeune étudiant de la Mi à franchi le seuil des 47 piano/panier prononcés en moins d'une minute !</p>
+					<h1>Pianos random à la une</h1>
+					<?php
+						$query="SELECT id, intitule, detail FROM Records ORDER BY RAND() LIMIT 3";
+						$requete = mysqli_query($db, $query);
+						while($reponse= $requete->fetch_assoc())
+						{?> 
+					<h2>Titre du piano  à la mode :<?php echo $reponse['intitule'];?></h2>
+					<p>Détail du piano  : <?php echo $reponse['detail']; } ?></p>
+					
 				</div>
 		</div>
 		
 		
-		<!-- Map de l'Icam-->
-		<div id="map" style="height: 40%; width: 40%;">
+		<!-- Map de l'Icam -34.397, 150.644-->  
+		
+		<div id="map" style="border: solid black 2px; height: 200px; width: 400px;">
 			<script>
+			  var map;
 			  function initMap() {
-				var icam = {lat: 50.630247, lng: 3.041703};
-				var map = new google.maps.Map(document.getElementById('map'), {
-				  zoom: 17,
-				  center: icam
+				map = new google.maps.Map(document.getElementById('map'), {
+				  center: {lat: 50.6299, lng: 3.0414},
+				  zoom: 18,
+					mapTypeId: 'satellite'
 				});
-				var marker = new google.maps.Marker({
-				  position: icam,
-				  map: map
-				});
-			  };
+				  map.setTilt(45);
+				  
+			  }
 			</script>
-		<script async defer
-    		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4xd3D0FMFyKmn4mADuzQJDxieTmKWz8k&callback=initMap">
-    	</script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=	AIzaSyDabbINunYPOvfWQhBKeBoMn1MwvHbky2Q&callback=initMap"
+			async defer></script>
 		</div>
+		
 
 		<!-- Déroulement des catégories-->
-		<div id=categories>
+		<div id=panelCategories >
 		<?php
-			$categories = $db->query('SELECT * FROM Categories ');
+			$categories = $db->query('SELECT * FROM Categories ORDER BY RAND() LIMIT 6 ');
 
 			while($row = $categories->fetch_assoc())
 			{
-				echo 'voici la catégorie n°'.$row['Id'].' : '.$row['nom'].'<br/>';
+				echo '<div class=categorie><a href="categorie.php?Id_categorie='.$row['Id'].'">'.$row['nom'].'</a></div></br>';
 			}
-			
 			$categories->close();
-		?>
+		?>	
 		</div>
 		
 		
 		<!-- bouton permettant de créer un record -->	
-		<div id=btn_creation_record>
-			<a href="creation_record/creation_record_Public.php" style="color: #942211"> Invente ton panier !</a>
+		<div id=btn_creation_record class="btn btn-success">
+			<a href="creation_record/creation_record_Public.php"> Invente ton panier !</a>
 		</div>
 
 
 		<!-- bouton permettant d'aller voir la liste des records existants -->
-		<div id=go_liste_records>
-			<a href="liste_record.php" style="color: #27BA85"> Voir la liste des pianos existants</a>
+		<div id=go_liste_records class="btn btn-success">
+			<a href="liste_record.php" > Voir la liste des pianos existants</a>
 		</div>
 		
 		
@@ -89,6 +107,7 @@
 
 </body>
 	<footer>
+		<a href="" >A propos</a>
 		<form action="admin/fonctionsPhp/login.php" method="POST">
 		  <input type="text" placeholder="Email" name="email" ><br>
 		  <input type="password" placeholder="Mot de passe" name="password" ><br>

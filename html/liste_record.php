@@ -19,7 +19,7 @@ include 'DBconfig.php';
 
 				while($row = $records->fetch_assoc())
 				{	
-					echo "<div id='" . $row['Id'] . "'><h2>" . $row['intitule'] . "</h2><br>" . "<p>" . $row['details'] . "</p>"   ;
+					echo "<div id='" . $row['Id'] . "'><h2>" . $row['intitule'] . "</h2><br>" . "<p>" . $row['detail'] . "</p>"   ;
 				};
 		?>
 	
