@@ -34,7 +34,7 @@
 	?>
 	<br>
 	<br>
-	<a class="btn btn-danger" href='FormAdminAccount.php'>Créer un compte admin</a>
+	<a class="btn btn-default" href='FormAdminAccount.php'>Créer un compte admin</a>
 	<a class="btn btn-default" href='../admin/creerRecord.php'>Créer un piano</a><br>
 	<br>
 	<h3>Liste des évènements non validés : </h3>
