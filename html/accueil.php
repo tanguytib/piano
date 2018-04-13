@@ -24,17 +24,9 @@
 	
 
 	<body>
-		<a href="accueil.php">Home</a>
-		<header>	
-			<h1>Piano  - Panier</h1>
-		</header>
-		
-
-		<!-- Formulaire de recherche -->
-		<form action="recherchebis.php" method="post">
-		  <input type="text" name="recherche" placeholder="Rechercher..." ><br>
-		  <input type="submit" value="" class="search_pic">
-		</form>
+		<?php
+			include '../html/background.php';
+		?>
 	
 	
 		<!-- Carrousel de records : affichage de quelques records avec flèches droites et gauches pour naviguer -->

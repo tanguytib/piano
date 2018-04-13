@@ -7,31 +7,14 @@
 
 <html>
 <head>
-	<meta charset="utf-8">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="/css/bootstrap/bootstrap.min.css">
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="/js/bootstrap/bootstrap.min.js"></script>
-	
-	<!-- Bootstrap confirmation -->
-	<script src='http://bootstrap-confirmation.js.org/dist/bootstrap-confirmation2/bootstrap-confirmation.min.js'></script>
-	
-	<link rel="stylesheet" href="/css/styles.css">
-	
+	<?php
+		include '../background.php';
+	?>
 	<title>Admin panel</title>
 </head>
 
 <body>
-	<h1 >Bienvenue sur l'accueil des Admins</h1>
-	<?php 
-		if (isset($_SESSION['msg'])){
-			echo 'INFO : ' . $_SESSION['msg'];
-			unset ($_SESSION['msg']); //Une fois le message affiché, on le supprime de la variable session
-		}
-	?>
+	<h1 >Gestion du site</h1>
 	<br>
 	<br>
 	<a class="btn btn-default" href='FormAdminAccount.php'>Créer un compte admin</a>
