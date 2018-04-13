@@ -11,11 +11,11 @@
     src: url(/content/fonts/sansation/Sansation_Bold.ttf) format("truetype");
 }
 
-body {
+.text {
   font-family: "sansation", verdana;
 }
 
-h4 {
+.title{
     font-family: "sansation-bold";
 }
 
@@ -36,6 +36,15 @@ h4 {
   border: 1px solid #DDD;
 }
 
+.hidden{
+	visibility: hidden;
+}
+
+.border{
+	border : dashed;
+	border-style: dashed;
+	border-width: 2px;
+}
 .logo{
 	height: 150px;
 	
@@ -48,8 +57,19 @@ h4 {
 	background-position: center;
 }
 
-.sectionmenu{
+.left {
+	text-align: left;
+}
+.center{
 	text-align: center;
+}
+
+.ongletcard{
+	font-size : 15px;
+}
+
+.ongletcard:hover{
+	background-color: grey !important;
 }
 
 .elementmenu{
@@ -57,6 +77,18 @@ h4 {
 	color: #003784;
 	font-size: 20px;
 	font-family: "sansation-bold", impact;
+}
+
+.imgcarousel{
+	width: 200px;
+}
+
+.card{
+	border-style: solid;
+	border-color: grey;
+	border-width: 2px;
+	border-radius: 10px;
+	height: 50%;
 }
 
 .categorie{

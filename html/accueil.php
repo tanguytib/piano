@@ -7,99 +7,135 @@
 <html lang="fr">
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="../css/styles.css">
+		<link rel="stylesheet" href="/css/styles.css">
+		<link rel="stylesheet" href="/css/loader.css">
 		<meta name="viewport" content="width=device-width">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		
 		<title>piano</title>
 	</head>
-	
-	
-	
 
 	<body>
 		<?php
 			include '../html/background.php';
 		?>
-	
-	
-		<!-- Carrousel de records : affichage de quelques records avec flèches droites et gauches pour naviguer -->
-		<div id=carrousel class="carousel-item">
-				<div id=NewRecord_1 style="border: thick #B85D6D 2px; width: 250px;">
-					<h1>Pianos random à la une</h1>
-					<?php
-						$query="SELECT id, intitule, detail FROM Records ORDER BY RAND() LIMIT 3";
-						$requete = mysqli_query($db, $query);
-						while($reponse= $requete->fetch_assoc())
-						{?> 
-					<h2>Titre du piano  à la mode :<?php echo $reponse['intitule'];?></h2>
-					<p>Détail du piano  : <?php echo $reponse['detail']; } ?></p>
-					
-				</div>
-		</div>
 		
-		
-		<!-- Map de l'Icam -34.397, 150.644-->  
-		
-		<div id="map" style="border: solid black 2px; height: 200px; width: 400px;">
-			<script>
-			  var map;
-			  function initMap() {
-				map = new google.maps.Map(document.getElementById('map'), {
-				  center: {lat: 50.6299, lng: 3.0414},
-				  zoom: 18,
-					mapTypeId: 'satellite'
-				});
-				  map.setTilt(45);
-				  
-			  }
-			</script>
-			<script src="https://maps.googleapis.com/maps/api/js?key=	AIzaSyDabbINunYPOvfWQhBKeBoMn1MwvHbky2Q&callback=initMap"
-			async defer></script>
-		</div>
-		
+		 <div class="container-fluid center col-lg-10 col-lg-offset-1">
+			 <div class="col-lg-12">
+			 <h1 class="title">Une sélection random</h1>
+			 </div>
+				<div class="card-group">
+						<?php
+							$query="SELECT Id, intitule, detail FROM Records ORDER BY RAND() LIMIT 3";
+							$requete = mysqli_query($db, $query);
+							while($reponse= $requete->fetch_assoc()){ 
+								$id = $reponse['Id'];
+								echo '<div class="col-md-4">
+										<div class="card">
+											<div class="card-header">
+												<ul class="nav nav-tabs card-header-tabs">
+												  <li class="nav-item col-xs-4">
+													<a onclick = "apercu("' . $id . '") class="nav-link active" href="#">Aperçu</a>
+												  </li>
+												  <li class="nav-item col-xs-4">
+													<a onclick = "detail("' . $id . '") class="nav-link" href="#">Détail</a>
+												  </li>
+												  <li class="nav-item col-xs-4">
+													<a onclick = "historique("' . $id . '") class="nav-link disabled" href="#">Historique</a>
+												  </li>
+												</ul>
+											 </div>
+											 <h3 class="card-title title">' . $reponse['intitule'] .'</h3>
+											<div id="apercuRecord' . $id . '">
+												<img class="card-img-top imgcarousel" src="/content/img/piano.png" alt="Card image">
+												<div class="card-body">
+												  <p class="card-text text">' . $reponse['detail'] .'</p>
+												  <a href="#" class="btn btn-warning">REVENDIQUER</a>
+												</div>
+											</div>
+											<div id="detailRecord' . $id . '" class="hidden">
+												<div class="card-body">
+												  <p class="card-text text"> Ceci est le detail complet </p>
+												</div>
+											</div>
+											<div id="historiqueRecord' . $id . '" class="hidden">
+												<div class="card-body">
+												  <p class="card-text text"> Ceci est lhistorique </p>
+												</div>
+											</div>
+											<br>
+										</div>
+									  </div>
+									  <script>
+									  	$( "#btnApercu' . $id .'" ).click(function() {
+											$( "#item" ).toggle();
+										});
+									  </script>';
+							} 
+						?>
+					<!--<script>
+						$(function apercu(Id){
+							document.getElementById(<?php echo '"apercuRecord' . $id . '"'?>).style.visibility = "visible";
+							document.getElementById(<?php echo '"detailRecord' . $id . '"'?>).style.visibility = "hidden";
+							document.getElementById(<?php echo '"historiqueRecord' . $id . '"'?>).style.visibility = "hidden";
+						});
+						$(function detail(Id){
+							document.getElementById(<?php echo '"apercuRecord' . $id . '"'?>).style.visibility = "hidden";
+							document.getElementById(<?php echo '"detailRecord' . $id . '"'?>).style.visibility = "visible";
+							document.getElementById(<?php echo '"historiqueRecord' . $id . '"'?>).style.visibility = "hidden";
+						});
+						$(function historique(Id){
+							document.getElementById(<?php echo '"apercuRecord' . $id . '"'?>).style.visibility = "hidden";
+							document.getElementById(<?php echo '"detailRecord' . $id . '"'?>).style.visibility = "hidden";
+							document.getElementById(<?php echo '"historiqueRecord' . $id .'"'?>).style.visibility = "visible";
+						});
+					</script>-->
+				</div>		
+			</div>
 
-		<!-- Déroulement des catégories-->
-		<div id=panelCategories >
-		<?php
-			$categories = $db->query('SELECT * FROM Categories ORDER BY RAND() LIMIT 6 ');
 
-			while($row = $categories->fetch_assoc())
-			{
-				echo '<div class=categorie><a href="categorie.php?Id_categorie='.$row['Id'].'">'.$row['nom'].'</a></div></br>';
-			}
-			$categories->close();
-		?>	
+			<!-- Déroulement des catégories-->
+			<div id="panelCategories texte">
+			<?php
+				$categories = $db->query('SELECT * FROM Categories ORDER BY RAND() LIMIT 6 ');
+
+				while($row = $categories->fetch_assoc())
+				{
+					echo '<div class=categorie><a href="categorie.php?Id_categorie='.$row['Id'].'">'.$row['nom'].'</a></div></br>';
+				}
+				$categories->close();
+			?>	
+			</div>
+
+
+			<!-- bouton permettant de créer un record -->	
+			<div id=btn_creation_record class="btn btn-success">
+				<a href="creation_record/creation_record_Public.php"> Invente ton panier !</a>
+			</div>
+
+
+			<!-- bouton permettant d'aller voir la liste des records existants -->
+			<div id=go_liste_records class="btn btn-success">
+				<a href="liste_record.php" > Voir la liste des pianos existants</a>
+			</div>
+
+
+			
 		</div>
-		
-		
-		<!-- bouton permettant de créer un record -->	
-		<div id=btn_creation_record class="btn btn-success">
-			<a href="creation_record/creation_record_Public.php"> Invente ton panier !</a>
-		</div>
-
-
-		<!-- bouton permettant d'aller voir la liste des records existants -->
-		<div id=go_liste_records class="btn btn-success">
-			<a href="liste_record.php" > Voir la liste des pianos existants</a>
-		</div>
-		
-		
-		<h3>What is Lorem Ipsum?</h2>
-		<p>
-		 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget velit interdum, ullamcorper elit vitae, imperdiet tortor. Ut nibh ex, vestibulum elementum nulla ac, euismod condimentum libero. Aliquam pretium iaculis diam. Duis vestibulum nec odio eget interdum. Nunc id arcu euismod magna condimentum lacinia vel vel felis. Nulla bibendum turpis at varius suscipit. Etiam finibus eleifend lectus quis luctus. Cras malesuada risus mattis fringilla pulvinar. Nam vel scelerisque ex. Pellentesque rhoncus tempus metus, sit amet hendrerit libero rutrum non. Maecenas molestie maximus odio a elementum. Vivamus vitae finibus quam, eget faucibus nibh.
-		 </p>
-
 
 </body>
 	<footer>
-		<a href="" >A propos</a>
+
 		<form action="admin/fonctionsPhp/login.php" method="POST">
 		  <input type="text" placeholder="Email" name="email" ><br>
 		  <input type="password" placeholder="Mot de passe" name="password" ><br>
