@@ -17,33 +17,26 @@ include '../html/DBconfig.php';
 	
 	$recherche= htmlspecialchars($_POST['recherche']);	
 	
-	rechercher($db, $recherche);
+	$resultat_recherche=rechercher($db, $recherche);
+	foreach($resultat_recherche as $value){
+		echo "$value </br>";
+	}
 	
 	function rechercher($db, $recherche)
 	{	
-		
-		#Création d'array de reponses vides
-		$resultat_personne=[];
-		$resultat_records=[];
-		$resultat_tags=[];
-		
-		#recuperation des Id des entrées de la Table Promo
-		$promos=[];
-		$requete_promo=$db->query("SELECT nom FROM Promos")or die(print_r($db->errorInfo()));;
-		while($row=$requete_promo->fetch_assoc()){
-		array_push($promos,$row);
-		}
-	
+
 		#Recherche par PROMO
 		if(preg_match("#^(11[89]|12[0123]|201[89]|202[0123]){1}$#", $recherche) ==1)
 		{
 			echo "<strong>Personnes : </strong><br>";
 			
-			$requete_bdd=$db->prepare("SELECT * FROM Personnes WHERE Idpromo IN $promos");
+			$requete_bdd=$db->prepare("SELECT Personnes.nom, Personnes.prenom 
+										FROM Personnes
+										JOIN Promos ON (Promos.Id = Personnes.Idpromo)
+										WHERE Promos.nom = ?");
 			$requete_bdd->bind_param('s',$recherche);
 			$requete_bdd->execute();
-			$resultat_personne=$requete_bdd->get_result();
-			$nombreDeResultatPersonnes=$resultat_personne->num_rows;
+			$result=$requete_bdd->get_result();
 		}
 		
 		else
@@ -79,11 +72,14 @@ include '../html/DBconfig.php';
 			}
 		}
 
+		$resultat=[];
+		while($row=$result->fetch_assoc())
+		{
+			array_push($resultat,$row['nom'],$row['prenom']);
+			
+		}
 		
-		
-	
-		return 'resultasPers :'.$resultat_personne.'NBresultasPers :'.$nombreDeResultatPersonnes.
-			'resultags :'.$resultat_tags.'NBresultags :'.$nombreDeResultatRecords; 
+		return $resultat;
 	}
 	
 	
