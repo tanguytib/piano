@@ -15,7 +15,6 @@
 	#Les tags existent-ils ?
 	$listetags = explode(" ", $tags);
 	$listeIdtags = array();
-
 	foreach ($listetags as $tag){
 		$query = "SELECT * FROM Tags WHERE nom = '$tag'";
 		$result = mysqli_query ($db, $query);
@@ -35,15 +34,16 @@
 	$result = mysqli_query($db, $query) or trigger_error($db->error);
 	$Idrecord = mysqli_insert_id($db);
 
+	#Insertion des liens des tags dans la base de données
+	foreach ($listeIdtags as $Idtag){
+		mysqli_query($db, "INSERT INTO TagsRecords(Idtag, Idrecord) VALUES('$Idtag', '$Idrecord')");
+	}
+
 	if ($result){
 		$_SESSION['msg'] = "Le panier a bien été créé !";
 	} else {
 		$_SESSION['msg'] = "Erreur lors de la création du piano :" . $result;
 	};
-
-	#Insertion des liens des tags dans la base de données
-	foreach ($listeIdtags as $Idtag){
-		mysqli_query($db, "INSERT INTO TagsRecords(Idtag, Idrecord) VALUES('$Idtag', '$Idrecord')");
-	}
+	
 	header('Location: /html/admin/accueilAdmin.php');
 ?>
