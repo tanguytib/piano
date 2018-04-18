@@ -80,7 +80,7 @@
 }
 
 .imgcarousel{
-	width: 200px;
+	width: 100px;
 }
 
 .card{
@@ -91,9 +91,7 @@
 	height: 50%;
 }
 
-.categorie{
-	font: 40px bold,Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif" ;
-}
+
 
 .alert{
 	margin-left: 10%;
@@ -114,9 +112,14 @@
 	z-index: 999999;
 }
 
-#panelCategories{
+.panelCategories{
 	display: flex;
-	justify-content: space-between;
+	flex-direction: row;
+}
+
+#categorieTMTC{
+	color:chartreuse;
+	text-decoration: line-through;
 }
 
 #searchbar{

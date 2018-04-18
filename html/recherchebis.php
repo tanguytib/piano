@@ -13,74 +13,79 @@ include '../html/DBconfig.php';
 	<h1>Voici les résultats de ta recherchebis !</h1>
 
 	<?php
-	#/!\ Attention il n'y a pas de lien dans la bdd entre les records et les personnes !
 	
 	$recherche= htmlspecialchars($_POST['recherche']);	
 	
-	$resultat_recherche=rechercher($db, $recherche);
-	foreach($resultat_recherche as $value){
-		echo "$value </br>";
-	}
-	
-	function rechercher($db, $recherche)
-	{	
 
 		#Recherche par PROMO
 		if(preg_match("#^(11[89]|12[0123]|201[89]|202[0123]){1}$#", $recherche) ==1)
 		{
 			echo "<strong>Personnes : </strong><br>";
 			
-			$requete_bdd=$db->prepare("SELECT Personnes.nom, Personnes.prenom 
+			$requete_bdd=$db->prepare("SELECT Personnes.nom, Personnes.prenom, Personnes.Id
 										FROM Personnes
 										JOIN Promos ON (Promos.Id = Personnes.Idpromo)
 										WHERE Promos.nom = ?");
 			$requete_bdd->bind_param('s',$recherche);
 			$requete_bdd->execute();
-			$result=$requete_bdd->get_result();
+			$resultPersonne=$requete_bdd->get_result();
+
 		}
 		
 		else
 		{	#recherche par INITIALES
 			if(preg_match("#^[a-zéèçôîûâ]{1}[a-zçôîûâ]{1}$#i",$recherche) ==1)
 			{	
-				echo "Initiales <br>";
+				echo "Initiales : <br>";
 				$prenom= '^'.$recherche[0];
 				$nom= '^'.$recherche[1];
 
-				$requete_bdd =$db->query("SELECT *
+				$requete_bdd =$db->prepare("SELECT *
 											FROM Personnes 
-											WHERE prenom REGEXP '" . $prenom . "'
-											AND nom REGEXP'" . $nom . "'")
+											WHERE prenom REGEXP ? 
+											AND nom REGEXP ?")
 									or die(print_r($db->errorInfo()));
-				$resultat_personne=$requete_bdd->get_result();
+				$requete_bdd->bind_param('ss',$prenom,$nom);
+				$requete_bdd->execute();	
+				$resultPersonne=$requete_bdd->get_result();
 				$nombreDeResultatPersonnes=$resultat_personne->num_rows;
+				echo 'cecei est le nombre de resultat personne '.$nombreDeResultatPersonnes;
 			}	
-		
-		
+
 			#recherche par Tag
 			else
 			{
-				$requete_bdd=$db->query('SELECT * 
+				$requete_bdd=$db->prepare("SELECT * 
 										FROM Records
-										JOIN TagRecords ON (TagsRecods.Idrecord = Records.Id)
-										JOIN Tag ON (Tags.Id=TagsRecords.Idtag)
-										WHERE Tags.nom ="'.$recherche.'"')
-								or die(print_r($db->errorInfo()))
-					;
-				$resultat_tags=$requete_bdd->get_result();
+										JOIN TagsRecords ON (TagsRecords.Idrecord = Records.Id)
+										JOIN Tags ON (Tags.Id=TagsRecords.Idtag)
+										WHERE Tags.nom = ?  ")
+								or die(print_r($db->errorInfo()));
+				$requete_bdd->bind_param('s',$recherche);
+				$requete_bdd->execute();	
+				$resultRecord=$requete_bdd->get_result();
 				$nombreDeResultatRecords=$resultat_tags->num_rows;
+				
+				while($row=$resultRecord->fetch_assoc())
+					{
+						echo '<div class=record>
+									<a href="record.php?Id_Record='.$row['Id'].'">'
+									.$row['intitule'].'</a>
+							</div></br>';
+					}
+			
 			}
 		}
 
-		$resultat=[];
-		while($row=$result->fetch_assoc())
-		{
-			array_push($resultat,$row['nom'],$row['prenom']);
-			
-		}
 		
-		return $resultat;
-	}
+		while($row=$resultPersonne->fetch_assoc())
+		{
+			echo '<div class=personne>
+						<a href="personne.php?Id_Personne='.$row['Personnes.Id'].'">'
+						.$row['nom'].' '.$row['nom'].'</a>
+				</div></br>';
+		}
+
 	
 	
 	#du branle en dessous

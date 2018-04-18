@@ -105,13 +105,13 @@
 
 
 			<!-- Déroulement des catégories-->
-			<div id="panelCategories texte">
+			<div id="panelCategories" class="col-md-12">
 			<?php
 				$categories = $db->query('SELECT * FROM Categories ORDER BY RAND() LIMIT 6 ');
 
 				while($row = $categories->fetch_assoc())
 				{
-					echo '<div class=categorie><a href="categorie.php?Id_categorie='.$row['Id'].'">'.$row['nom'].'</a></div></br>';
+					echo '<div class=categorieTMTC><a href="categorie.php?Id_categorie='.$row['Id'].'">'.$row['nom'].'</a></div></br>';
 				}
 				$categories->close();
 			?>	
