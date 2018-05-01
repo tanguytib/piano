@@ -48,7 +48,7 @@ include '../html/DBconfig.php';
 				$requete_bdd->bind_param('ss',$prenom,$nom);
 				$requete_bdd->execute();	
 				$resultPersonne=$requete_bdd->get_result();
-				$nombreDeResultatPersonnes=$resultat_personne->num_rows;
+				$nombreDeResultatPersonnes=$resultPersonne->num_rows;
 				echo 'cecei est le nombre de resultat personne '.$nombreDeResultatPersonnes;
 			}	
 
@@ -64,7 +64,7 @@ include '../html/DBconfig.php';
 				$requete_bdd->bind_param('s',$recherche);
 				$requete_bdd->execute();	
 				$resultRecord=$requete_bdd->get_result();
-				$nombreDeResultatRecords=$resultat_tags->num_rows;
+				$nombreDeResultatRecords=$resultRecord->num_rows;
 				
 				while($row=$resultRecord->fetch_assoc())
 					{
@@ -73,7 +73,6 @@ include '../html/DBconfig.php';
 									.$row['intitule'].'</a>
 							</div></br>';
 					}
-			
 			}
 		}
 

@@ -112,14 +112,18 @@
 	z-index: 999999;
 }
 
-.panelCategories{
-	display: flex;
+#panelCategories{
+	display: flex !important; 
 	flex-direction: row;
+	
 }
 
-#categorieTMTC{
+
+.categorieTMTC{
 	color:chartreuse;
-	text-decoration: line-through;
+	text-decoration: underline;
+	font-size: 3em;
+	
 }
 
 #searchbar{
