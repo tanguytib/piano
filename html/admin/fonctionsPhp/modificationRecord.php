@@ -44,9 +44,9 @@
 
 
 	if ($result){
-		$_SESSION['msg'] = "Le panier a bien été modifié !";
+		$_SESSION['msg'] = "Le record a bien été modifié !";
 	} else {
-		$_SESSION['msg'] = "Erreur lors de la modification du piano :" . $query;
+		$_SESSION['msg'] = "Erreur lors de la modification du record :" . $query;
 	};
 
 	header('Location: /html/admin/accueilAdmin.php');

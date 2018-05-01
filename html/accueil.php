@@ -21,7 +21,7 @@
 
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-		
+
 		<title>piano</title>
 	</head>
 
@@ -29,7 +29,7 @@
 		<?php
 			include '../html/background.php';
 		?>
-		
+
 		 <div class="container-fluid center col-lg-10 col-lg-offset-1">
 			 <div class="col-lg-12">
 			 <h1 class="title">Une sélection random</h1>
@@ -38,7 +38,7 @@
 						<?php
 							$query="SELECT Id, intitule, detail FROM Records ORDER BY RAND() LIMIT 3";
 							$requete = mysqli_query($db, $query);
-							while($reponse= $requete->fetch_assoc()){ 
+							while($reponse= $requete->fetch_assoc()){
 								$id = $reponse['Id'];
 								echo '<div class="col-md-4">
 										<div class="card">
@@ -81,7 +81,7 @@
 											$( "#item" ).toggle();
 										});
 									  </script>';
-							} 
+							}
 						?>
 					<!--<script>
 						$(function apercu(Id){
@@ -100,7 +100,7 @@
 							document.getElementById(<?php echo '"historiqueRecord' . $id .'"'?>).style.visibility = "visible";
 						});
 					</script>-->
-				</div>		
+				</div>
 			</div>
 
 
@@ -111,10 +111,10 @@
 					$categories = $db->query('SELECT * FROM Categories ORDER BY RAND() LIMIT 6 ');
 					while($row = $categories->fetch_assoc())
 					{
-						echo '<a href="categorie.php?Id_categorie='.$row['Id'].'">'.$row['nom'].'           </a>';
+						echo '<a class="btn btn-default" style="margin-left:30px" href="categorie.php?Id_categorie='.$row['Id'].'">'.$row['nom'].'</a>';
 					}
 					$categories->close();
-				?>	
+				?>
 				<br>
 			</div>
 		</div>
@@ -122,16 +122,16 @@
 </body>
 	<footer>
 
-		
-		
 
-		<div class="col-md-12" onclick="showLogin();">Se connecter</div>
-		<div id="loginSection">
-			<form action="admin/fonctionsPhp/login.php" method="POST">
-			  <input type="text" placeholder="Email" name="email" ><br>
-			  <input type="password" placeholder="Mot de passe" name="password" ><br>
-			  <input type="submit" value="envoyer" >
-			</form>
+
+		<div class="col-md-12 text-center" style="margin-top:20px" onclick="showLogin();">Espace administrateur :
+			<div id="loginSection">
+				<form action="admin/fonctionsPhp/login.php" method="POST">
+				  <input style="margin-left: 5px" type="text" placeholder="Email" name="email" >
+				  <input style="margin-left: 10px" type="password" placeholder="Mot de passe" name="password" >
+				  <input type="submit" value="connexion" >
+				</form>
+			</div>
 		</div>
 		<script type="text/javascript">
 			function showLogin() {
@@ -139,7 +139,7 @@
 				ctn.display = ctn.display == 'none' ? 'block' : 'none';
 			}
 		</script>
-		<?php 
+		<?php
 			if (isset($_SESSION['msg'])){
 			echo 'INFO : ' . $_SESSION['msg'];
 			unset ($_SESSION['msg']);} //Une fois le message affiché, on le supprime de la variable session
