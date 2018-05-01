@@ -105,42 +105,40 @@
 
 
 			<!-- Déroulement des catégories-->
-			<div id="panelCategories" class="col-md-12">
-			<?php
-				$categories = $db->query('SELECT * FROM Categories ORDER BY RAND() LIMIT 6 ');
-
-				while($row = $categories->fetch_assoc())
-				{
-					echo '<div class=categorieTMTC><a href="categorie.php?Id_categorie='.$row['Id'].'">'.$row['nom'].'</a></div></br>';
-				}
-				$categories->close();
-			?>	
+			<div id="panelCategories" class="col-md-12 text-center">
+				<br>
+				<?php
+					$categories = $db->query('SELECT * FROM Categories ORDER BY RAND() LIMIT 6 ');
+					while($row = $categories->fetch_assoc())
+					{
+						echo '<a href="categorie.php?Id_categorie='.$row['Id'].'">'.$row['nom'].'           </a>';
+					}
+					$categories->close();
+				?>	
+				<br>
 			</div>
-
-
-			<!-- bouton permettant de créer un record -->	
-			<div id=btn_creation_record class="btn btn-success">
-				<a href="creation_record/creation_record_Public.php"> Invente ton panier !</a>
-			</div>
-
-
-			<!-- bouton permettant d'aller voir la liste des records existants -->
-			<div id=go_liste_records class="btn btn-success">
-				<a href="liste_record.php" > Voir la liste des pianos existants</a>
-			</div>
-
-
-			
 		</div>
 
 </body>
 	<footer>
 
-		<form action="admin/fonctionsPhp/login.php" method="POST">
-		  <input type="text" placeholder="Email" name="email" ><br>
-		  <input type="password" placeholder="Mot de passe" name="password" ><br>
-		  <input type="submit" value="envoyer" >
-		</form>
+		
+		
+
+		<div class="col-md-12" onclick="showLogin();">Se connecter</div>
+		<div id="loginSection">
+			<form action="admin/fonctionsPhp/login.php" method="POST">
+			  <input type="text" placeholder="Email" name="email" ><br>
+			  <input type="password" placeholder="Mot de passe" name="password" ><br>
+			  <input type="submit" value="envoyer" >
+			</form>
+		</div>
+		<script type="text/javascript">
+			function showLogin() {
+				var ctn = document.getElementById('loginSection');
+				ctn.display = ctn.display == 'none' ? 'block' : 'none';
+			}
+		</script>
 		<?php 
 			if (isset($_SESSION['msg'])){
 			echo 'INFO : ' . $_SESSION['msg'];
