@@ -44,10 +44,10 @@
 								<div class='col-lg-5'>" . $row['detail'] . "
 								</div>
 								<div class='col-lg-2'>
-									<a class='btn btn-default' href=../admin/modifierRecord.php?Id=" . $row['Idevenement'] . "> Editer </a>
+									<a class='btn btn-default' href=../admin/modifierRecord.php?Id=" . $row['Idevenement'] . "> Editer le record</a>
 								</div>
-								<div class='col-lg-1'>
-									<a class='btn btn-success' href=../admin/modifierEvenement.php?Id=" . $row['Idevenement'] . "> Attester</a>
+								<div class='col-lg-2'>
+									<a class='btn btn-success' href=../admin/modifierEvenement.php?Id=" . $row['Idevenement'] . "> Attester l'événement</a>
 								</div>
 								<div class='col-lg-1'>
 									<button class='btn btn-large btn-danger' data-toggle='confirmation'

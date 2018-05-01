@@ -44,7 +44,13 @@
 </head>
 
 <body>
-	<ul class="container-fluid row menu sansation">		
+	<ul class="container-fluid row menu sansation">	
+		<?php
+		if ($_SESSION['logged']==1){
+			echo '<a href="/html/admin/fonctionsPhp/disconnect.php"><p style="color:#0f408e; font-style: italic; font-size: 15px; margin-left: 10px;">Déconnexion</p></a>';
+		}
+		?>
+		
 		<div class="sectionmenu col-sm-2 col-sm-offset-1">
 			<a href="/html/liste_record.php" class="elementmenu">Les records</a>
 		</div>
@@ -66,10 +72,10 @@
 		  <input id="searchbar" class="elementmenu" type="text" name="recherche" placeholder="Rechercher..." ><br>
 		</form>
 	</ul>
-	<div id="msgbox" class="alert alert-warning initiallyHidden" role="alert">
+	<div id="msgbox" class="alert alert-warning initiallyHidden text-center" role="alert">
 		<?php 
 			if (isset($_SESSION['msg'])){
-				echo '<H4>INFO :<H4>' . $_SESSION['msg'];
+				echo '<h4 class="title">' . $_SESSION['msg'] . '</h4>';
 				unset ($_SESSION['msg']); //Une fois le message affiché, on le supprime de la variable session
 				echo "<script>	
 						window.onload=function()  //executes when the page finishes loading
@@ -89,8 +95,5 @@
 			} 
 		?>
 	</div>
-
-	
 </body>
-
 </html>

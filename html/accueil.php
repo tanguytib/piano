@@ -41,7 +41,7 @@
 							while($reponse= $requete->fetch_assoc()){
 								$id = $reponse['Id'];
 								echo '<div class="col-md-4">
-										<div class="card">
+										<div class="card" style="margin-bottom:10px;">
 											<div class="card-header">
 												<ul class="nav nav-tabs card-header-tabs">
 												  <li class="nav-item col-xs-4">
@@ -101,23 +101,22 @@
 						});
 					</script>-->
 				</div>
-			</div>
+	
 
 
-			<!-- Déroulement des catégories-->
-			<div id="panelCategories" class="col-md-12 text-center">
-				<br>
-				<?php
-					$categories = $db->query('SELECT * FROM Categories ORDER BY RAND() LIMIT 6 ');
-					while($row = $categories->fetch_assoc())
-					{
-						echo '<a class="btn btn-default" style="margin-left:30px" href="categorie.php?Id_categorie='.$row['Id'].'">'.$row['nom'].'</a>';
-					}
-					$categories->close();
-				?>
-				<br>
+				<!-- Déroulement des catégories-->
+					<div id="panelCategories" style="width:100%; margin:auto; margin-top:20px; ">
+						<?php
+							$categories = $db->query('SELECT * FROM Categories ORDER BY RAND() LIMIT 8 ');
+							while($row = $categories->fetch_assoc())
+							{
+								echo '<a class="btn btn-default center-block" href="categorie.php?Id_categorie='.$row['Id'].'">'.$row['nom'].'</a>';
+							}
+							$categories->close();
+						?>
+						<br>
+					</div>
 			</div>
-		</div>
 
 </body>
 	<footer>

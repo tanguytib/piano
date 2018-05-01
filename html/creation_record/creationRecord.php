@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include '../DBconfig.php';
+	include '../admin/DBconfig.php';
 
 	$Id=mysqli_real_escape_string($db, $_POST['Idrecord']);
 	$intitule = mysqli_real_escape_string($db, $_POST['intitule']);
@@ -40,10 +40,10 @@
 	}
 
 	if ($result){
-		$_SESSION['msg'] = "Le panier a bien été créé !";
+		$_SESSION['msg'] = "Le record a bien été créé !";
 	} else {
-		$_SESSION['msg'] = "Erreur lors de la création du piano :" . $result;
+		$_SESSION['msg'] = "Erreur lors de la création du record :" . $result;
 	};
 	
-	header('Location: /html/admin/accueilAdmin.php');
+	header('Location: /html/accueil.php');
 ?>

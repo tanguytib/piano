@@ -11,6 +11,10 @@
     src: url(/content/fonts/sansation/Sansation_Bold.ttf) format("truetype");
 }
 
+.body {
+	background-image: url('../content/img/bg1.jpg');
+}
+
 .text {
   font-family: "sansation", verdana;
 }

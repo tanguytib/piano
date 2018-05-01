@@ -15,13 +15,23 @@
 
 <body>
 	<div class="col-lg-12 text-center">
-		 <h1 class="title">Attestation d'un événement</h1><br><br>
+		 <h1 class="title">Attestation d'un événement</h1>
+	</div>
+	<div class="col-lg-12 text-center">
+		 <h3 class="title">
+			 Pour le record : 
+			 <?php
+			 	$Id = htmlspecialchars($_GET['Id']);
+			 	$request = $db->query('SELECT Records.intitule FROM Evenements INNER JOIN Records ON Evenements.Idrecord=Records.Id WHERE Evenements.Id="' . $Id .'"') or die(print_r($db->errorInfo()));
+				$result = $request->fetch_assoc();
+			 	echo $result['intitule'];
+			 ?>
+		 </h3><br>
 	</div>
 	 <div class="container-fluid col-lg-4 col-lg-offset-4">
 		 
 	<?php 
 		#On récupère les informations de l'évènement à modifier
-		$Id = htmlspecialchars($_GET['Id']);
 		$evenements = $db->query('SELECT *, Personnes.nom AS nomPersonne, Promos.nom AS nomPromo FROM Evenements INNER JOIN Personnes ON Evenements.Idpersonne=Personnes.Id INNER JOIN Promos ON Personnes.Idpromo=Promos.Id WHERE Evenements.Id="' . $Id .'"') or die(print_r($db->errorInfo()));
 		$evenement = $evenements->fetch_assoc();
 	?>
@@ -35,7 +45,7 @@
 		Date de revendication : <input type='date' name='date_revendication' value=<?php echo  "'" . $evenement['date_revendication'] . "'" ?>/><br><br>
 		Date de validation : <input type='date' name='date_validation' value=<?php echo "'" . $evenement['date_validation'] . "'" ?></input><br><br>
 
-		<input class="btn btn-success" name='submitevent' type='submit' value="J'atteste cet événement">
+		<input class="btn btn-success" name='submitevent' type='submit' value="Attester cet événement"</input>
 	</form><br>
 
 </body>
