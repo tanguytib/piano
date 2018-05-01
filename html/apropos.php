@@ -2,6 +2,25 @@
 	session_start();
 	include '../html/DBconfig.php';
 ?>
+<<<<<<< HEAD
+<!DOCTYPE HTML>
+<html>
+<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../css/styles.css">
+		<meta name="viewport" content="width=device-width">
+		<title>piano</title>		
+</head>
+
+<body>
+	<a href="accueil.php">Home</a>
+	<h1>A propos des mecs stylés</h1>
+	<p>Ici on peut raconter pourquoi on fait cette asso et qu'au départ on était 4 à avoir l'idée, mais depuis on cherche à agrendir l'effectif blablbababaabntmblblabablabalbla </p>
+
+
+</body>
+</html>
+=======
 
 <!DOCTYPE HTML>
 <html lang="fr">
@@ -38,3 +57,4 @@
 		 </div>
 	</body>
 </html>
+>>>>>>> 9c088d0e3847754135e876b99e50d023f5456c27
