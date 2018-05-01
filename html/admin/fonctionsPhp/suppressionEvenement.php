@@ -1,7 +1,7 @@
 <?php
 	session_start();
-	include '../DBconfig.php';
-	include '../admin/fonctionsPhp/logincheck.php';
+	include '/html/DBconfig.php';
+	include '/html/admin/fonctionsPhp/logincheck.php';
 
 	$id=htmlspecialchars($_GET['Id']);
 	$result = $db->query("DELETE FROM Evenements WHERE Id='$id'");

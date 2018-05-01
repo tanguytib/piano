@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include '../admin/DBconfig.php';
+	include '/html/admin/DBconfig.php';
 
 	$Id=mysqli_real_escape_string($db, $_POST['Idrecord']);
 	$intitule = mysqli_real_escape_string($db, $_POST['intitule']);

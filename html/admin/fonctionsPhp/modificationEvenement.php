@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include '../DBconfig.php';
+	include '/html/DBconfig.php';
 
 	$Idevenement=mysqli_real_escape_string($db, $_POST['Idevenement']);
 	$nom = mysqli_real_escape_string($db, $_POST['nom']);

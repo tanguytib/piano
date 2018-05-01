@@ -1,8 +1,8 @@
 <!doctype HTML>
 <?php
 	session_start();
-	include '../admin/fonctionsPhp/logincheck.php';
-	include '../DBconfig.php';
+	include '/html/admin/fonctionsPhp/logincheck.php';
+	include '/html/DBconfig.php';
 ?>
 
 <html>

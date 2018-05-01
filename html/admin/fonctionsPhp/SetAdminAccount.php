@@ -1,7 +1,7 @@
 <!doctype HTML>
 <?php
 	session_start();
-	include '../../DBconfig.php';
+	include '/html/DBconfig.php';
 
 	$nom = htmlspecialchars($_POST['nom']);
 	$prenom =  htmlspecialchars($_POST['prenom']);

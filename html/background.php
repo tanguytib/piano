@@ -64,7 +64,7 @@
 		</div>
 		
 		<div class="sectionmenu col-sm-2">
-			<a href="http://google.com" class="elementmenu">Créer un record</a>
+			<a href="/html/creation_record/creerRecord.php" class="elementmenu">Créer un record</a>
 		</div>
 		
 		<!-- Formulaire de recherche -->

@@ -1,14 +1,13 @@
 <!doctype HTML>
 <?php
 	session_start();
-	include '../admin/fonctionsPhp/logincheck.php';
-	include '../DBconfig.php';
+	include '/html/DBconfig.php';
 ?>
 
 <html>
 <head>
 	<?php
-		include '../background.php';
+		include '/html/background.php';
 	?>
 	<title>Admin panel</title>
 </head>
