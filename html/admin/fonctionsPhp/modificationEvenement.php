@@ -42,9 +42,9 @@
 	$result = mysqli_query($db, $query) or trigger_error($db->error);
 	
 	if ($result){
-		$_SESSION['msg'] = "Le panier a bien été modifié !";
+		$_SESSION['msg'] = "L'événement' a bien été modifié !";
 	} else {
-		$_SESSION['msg'] = "Erreur lors de la modification du panier :" . $query;
+		$_SESSION['msg'] = "Erreur lors de la modification de l'événement :" . $query;
 	};
 	header('Location: /html/admin/accueilAdmin.php');
 ?>

@@ -15,7 +15,7 @@ if (!($_POST['password'] == '') and !($_POST['email']=='')){
 			
 			$_SESSION['email'] = $email;
 			$_SESSION['logged'] = 1;
-			$_SESSION['msg'] = 'Loggin sucessfull';
+			$_SESSION['msg'] = 'Bienvenue, ' . $row['prenom'] . ' ' . $row['nom'] . ' !';
 			
 		} else {
 			

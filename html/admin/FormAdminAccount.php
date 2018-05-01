@@ -1,20 +1,30 @@
-<!doctype html>
+<!doctype HTML>
+<?php
+	session_start();
+	include '../admin/fonctionsPhp/logincheck.php';
+	include '../DBconfig.php';
+?>
+
 <html>
 <head>
-<meta charset="utf-8">
-<title>Créer un compte</title>
+	<?php
+		include '../background.php';
+	?>
+	<title>Admin panel</title>
 </head>
 
 <body>
-	Créer un compte administrateur :
-	<form action='fonctionsPhp/SetAdminAccount.php' method='post'>
-		Nom : <input name='nom' type='text'><br>
-		Prénom : <input name='prenom' type='text'><br>
-		Promo : <input name='promo' type='number'><br>
-		Adresse mail : <input name='email' type='text'><br>
-		Mot de passe : <input name='password' type='password'><br>
-		<input name='stupid' type='checkbox'> Je certifie ne pas avoir lu la charte <br>
-		<input name='submit' type='submit' value='envoyer'>
-	</form>
+	<h1 class="title text-center">Créer un compte administrateur :</h1><br>
+	 <div class="container-fluid col-lg-4 col-lg-offset-4">
+		<form action='fonctionsPhp/SetAdminAccount.php' method='post'>
+			<b>Nom : </b><input name='nom' type='text'><br><br>
+			<b>Prénom : </b><input name='prenom' type='text'><br><br>
+			<b>Promo : </b><input name='promo' type='number'><br><br>
+			<b>Adresse mail : </b><input name='email' type='text'><br><br>
+			<b>Mot de passe : </b><input name='password' type='password'><br><br>
+			<b><input name='stupid' type='checkbox'> Je certifie ne pas avoir lu la charte <br><br></b>
+			<input class="btn btn-success" name='submit' type='submit' value='Créer un compte'>
+		</form>
+	</div>
 </body>
 </html>

@@ -46,15 +46,15 @@
 <body>
 	<ul class="container-fluid row menu sansation">		
 		<div class="sectionmenu col-sm-2 col-sm-offset-1">
-			<a href="http://google.com" class="elementmenu">Les records</a>
+			<a href="/html/liste_record.php" class="elementmenu">Les records</a>
 		</div>
 		
 		<div class="sectionmenu col-sm-2">
-			<a href="http://google.com" class="elementmenu">Comment ça marche</a>
+			<a href="/html/apropos.php" class="elementmenu">Comment ça marche</a>
 		</div>
 	
 		<div class="sectionmenu col-sm-2">
-			<img src="/content//img/logo2.png" class="elementmenu logo">
+			<a href="/html/accueil.php"><img src="/content//img/logo2.png" class="elementmenu logo"></a>
 		</div>
 		
 		<div class="sectionmenu col-sm-2">
