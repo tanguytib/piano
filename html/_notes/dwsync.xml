@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="accueil.php" server="ftp.pnfradio.fr" local="131696376168799940" remote="131696379000000000" Dst="2" />
@@ -10,3 +11,6 @@
 <file name="recherchebis.php" server="ftp.pnfradio.fr" local="131696391893197248" remote="131696391600000000" Dst="2" />
 <file name="background.php" server="ftp.pnfradio.fr" local="131696388044245450" remote="131696388600000000" Dst="2" />
 </dwsync>
+=======
+<?xml version="1.0" encoding="utf-8" ?><dwsync><file name="accueil.php" server="ftp.pnfradio.fr" local="3606887430" remote="3606887400" Dst="1" /><file name="DBconfig.php" server="ftp.pnfradio.fr" local="3603278687" remote="3603278640" Dst="1" /><file name="DBconfig.php" server="Macintosh HD/Users/gregoiremarotte/Desktop/MonPiano" local="3602166476" remote="3602166476" Dst="-1" /><file name="accueil.php" server="Macintosh HD/Users/gregoiremarotte/Desktop/MonPiano" local="3602019536" remote="3602019536" Dst="-1" /><file name="liste_record.php" server="ftp.pnfradio.fr" local="3606104756" remote="3606104700" Dst="-1" /><file name="recherche.php" server="ftp.pnfradio.fr" local="3606108755" remote="3606108720" Dst="-1" /><file name="categorie.php" server="ftp.pnfradio.fr" local="3606111014" remote="3606111000" Dst="-1" /><file name="apropos.html" server="ftp.pnfradio.fr" local="3606108547" remote="3606108540" Dst="-1" /><file name="recherchebis.php" server="ftp.pnfradio.fr" local="3606907338" remote="3606907320" Dst="-1" /></dwsync>
+>>>>>>> origin/master

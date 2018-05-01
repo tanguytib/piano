@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="accueilAdmin.php" server="ftp.pnfradio.fr" local="131696397342395344" remote="131696397000000000" Dst="2" />
@@ -6,3 +7,6 @@
 <file name="creerRecord.php" server="ftp.pnfradio.fr" local="131676903853889165" remote="131676903600000000" Dst="2" />
 <file name="modifierEvenement.php" server="ftp.pnfradio.fr" local="131696417243293145" remote="131696416800000000" Dst="2" />
 </dwsync>
+=======
+<?xml version="1.0" encoding="utf-8" ?><dwsync><file name="accueilAdmin.php" server="ftp.pnfradio.fr" local="3606908018" remote="3606908220" Dst="2" /><file name="FormAdminAccount.php" server="ftp.pnfradio.fr" local="131644710596405225" remote="131668773000000000" Dst="2" /><file name="modifierRecord.php" server="ftp.pnfradio.fr" local="131676933405050836" remote="131676933000000000" Dst="2" /><file name="creerRecord.php" server="ftp.pnfradio.fr" local="131676903853889165" remote="131676903600000000" Dst="2" /></dwsync>
+>>>>>>> origin/master

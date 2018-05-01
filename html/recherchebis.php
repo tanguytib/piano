@@ -13,8 +13,22 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<<<<<<< HEAD
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+=======
+				$requete_bdd =$db->prepare("SELECT *
+											FROM Personnes 
+											WHERE prenom REGEXP ? 
+											AND nom REGEXP ?")
+									or die(print_r($db->errorInfo()));
+				$requete_bdd->bind_param('ss',$prenom,$nom);
+				$requete_bdd->execute();	
+				$resultPersonne=$requete_bdd->get_result();
+				$nombreDeResultatPersonnes=$resultPersonne->num_rows;
+				echo 'cecei est le nombre de resultat personne '.$nombreDeResultatPersonnes;
+			}	
+>>>>>>> origin/master
 
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -49,9 +63,23 @@
 											JOIN Promos ON (Promos.Id = Personnes.Idpromo)
 											WHERE Promos.nom = ?");
 				$requete_bdd->bind_param('s',$recherche);
+<<<<<<< HEAD
 				$requete_bdd->execute();
 				$resultPersonne=$requete_bdd->get_result();
 
+=======
+				$requete_bdd->execute();	
+				$resultRecord=$requete_bdd->get_result();
+				$nombreDeResultatRecords=$resultRecord->num_rows;
+				
+				while($row=$resultRecord->fetch_assoc())
+					{
+						echo '<div class=record>
+									<a href="record.php?Id_Record='.$row['Id'].'">'
+									.$row['intitule'].'</a>
+							</div></br>';
+					}
+>>>>>>> origin/master
 			}
 
 			else
