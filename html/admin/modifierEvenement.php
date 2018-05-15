@@ -1,8 +1,8 @@
 <!doctype HTML>
 <?php
 	session_start();
-	include '/html/admin/fonctionsPhp/logincheck.php';
-	include '/html/DBconfig.php';
+	include './fonctionsPhp/loginCheck.php';
+	include '../DBconfig.php';
 ?>
 
 <html>
@@ -19,7 +19,7 @@
 	</div>
 	<div class="col-lg-12 text-center">
 		 <h3 class="title">
-			 Pour le record : 
+			 Pour le record :
 			 <?php
 			 	$Id = htmlspecialchars($_GET['Id']);
 			 	$request = $db->query('SELECT Records.intitule FROM Evenements INNER JOIN Records ON Evenements.Idrecord=Records.Id WHERE Evenements.Id="' . $Id .'"') or die(print_r($db->errorInfo()));
@@ -29,8 +29,8 @@
 		 </h3><br>
 	</div>
 	 <div class="container-fluid col-lg-4 col-lg-offset-4">
-		 
-	<?php 
+
+	<?php
 		#On récupère les informations de l'évènement à modifier
 		$evenements = $db->query('SELECT *, Personnes.nom AS nomPersonne, Promos.nom AS nomPromo FROM Evenements INNER JOIN Personnes ON Evenements.Idpersonne=Personnes.Id INNER JOIN Promos ON Personnes.Idpromo=Promos.Id WHERE Evenements.Id="' . $Id .'"') or die(print_r($db->errorInfo()));
 		$evenement = $evenements->fetch_assoc();

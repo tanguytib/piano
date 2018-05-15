@@ -1,7 +1,7 @@
 <!doctype HTML>
 <?php
 	session_start();
-	include '../admin/fonctionsPhp/logincheck.php';
+	include './fonctionsPhp/loginCheck.php';
 	include '../DBconfig.php';
 ?>
 
@@ -19,7 +19,7 @@
 		 <h1 class="title">Administration du site</h1>
 		 </div>
 		<a class="btn btn-default" style="margin-right:20px" href='FormAdminAccount.php'>Créer un compte administrateur</a>
-		<a class="btn btn-default" href='../admin/creerRecord.php'>Créer un record</a><br>
+		<a class="btn btn-default" href='../creation_record/creerRecord.php'>Créer un record</a><br>
 		<br>
 		<h3>Liste des demandes à traiter : </h3>
 		<br>
@@ -29,15 +29,15 @@
 			<?php
 				#On recherche les évènements non validés
 					$recordsRevendique = $db->query("SELECT *, Evenements.Id AS Idevenement FROM Evenements INNER JOIN Records ON Evenements.Idrecord=Records.Id WHERE IsNull(Evenements.date_validation) OR Evenements.date_validation='0000-00-00'") or die(print_r($db->errorInfo()));
-						while($row = $recordsRevendique->fetch_assoc()) 
-						{	
-							echo 
+						while($row = $recordsRevendique->fetch_assoc())
+						{
+							echo
 							"
 							<div class='row row-padded'>
 								<div class='col-lg-3'>
 									<div class='row'>
 										<div class='col-lg-12'>
-											<h2>" . $row['intitule'] . "</h2> 
+											<h2>" . $row['intitule'] . "</h2>
 										</div>
 									</div>
 								</div>
@@ -66,7 +66,7 @@
 		</div>
 	<br>
 
-	
+
 	<!-- Javascript popup confirmation-->
 	<script>
 		$('[data-toggle=confirmation]').confirmation({

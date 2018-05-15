@@ -1,13 +1,13 @@
 <!doctype HTML>
 <?php
 	session_start();
-	include '/html/DBconfig.php';
+	include '../DBconfig.php';
 ?>
 
 <html>
 <head>
 	<?php
-		include '/html/background.php';
+		include '../background.php';
 	?>
 	<title>Admin panel</title>
 </head>
@@ -24,7 +24,7 @@
 		<b>Description : </b><textarea name='detail' records="4" cols="100"></textarea><br><br>
 		<b>Catégorie :</b>
 			<select name="categorie" size="1">
-			<?php 
+			<?php
 				$categories = $db->query('SELECT * FROM Categories') or die(print_r($db->errorInfo()));
 				while($categorie = $categories->fetch_assoc())
 				{
@@ -40,6 +40,6 @@
 		<input class="btn btn-success" name='submitrecord' type='submit' value='Créer un record'>
 	</form>
 	<br><br>
-	
+
 </body>
 </html>

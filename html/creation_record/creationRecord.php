@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include '/html/admin/DBconfig.php';
+	include '../DBconfig.php';
 
 	$Id=mysqli_real_escape_string($db, $_POST['Idrecord']);
 	$intitule = mysqli_real_escape_string($db, $_POST['intitule']);
@@ -10,7 +10,7 @@
 	#A quel Id correspond la catégorie sélectionnée ?
 	$query = "SELECT * FROM Categories WHERE nom='$categorie'";
 	$categorieId = mysqli_query($db, $query)->fetch_assoc()['Id'];
-	
+
 
 	#Les tags existent-ils ?
 	$listetags = explode(" ", $tags);
@@ -26,7 +26,7 @@
 		}
 		array_push ($listeIdtags, $Idtag);
 	}
-	
+
 
 	#Insertion du record dans la table
 	$query = "INSERT INTO Records (intitule, detail, Idcategorie) VALUES ('$intitule', '$detail', '$categorieId');";
@@ -40,10 +40,10 @@
 	}
 
 	if ($result){
-		$_SESSION['msg'] = "Le record a bien été créé !";
+		$_SESSION['msg'] = "Le record a bien été créé, et sera proposé aux admins !";
 	} else {
 		$_SESSION['msg'] = "Erreur lors de la création du record :" . $result;
 	};
-	
+
 	header('Location: /html/accueil.php');
 ?>

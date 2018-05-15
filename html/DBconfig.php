@@ -7,7 +7,7 @@
 
 	global $db;
 	$db = new mysqli($hostname, $username, $password, $dbname);
-
+	mysqli_set_charset($db,"utf8");
 	// Check connection
 	if (mysqli_connect_error()) {
 		die("Database connection failed: " . mysqli_connect_error());

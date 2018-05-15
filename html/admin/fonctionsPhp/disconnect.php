@@ -1,5 +1,6 @@
 <?php
 	session_start();
 	unset($_SESSION['logged']);
-	header('Location: /html/accueil.php');
+	$_SESSION['msg'] = "Vous avez bien été déconnecté !";
+	header('Location: ../../accueil.php');
 ?>
